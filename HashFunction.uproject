@@ -1,0 +1,16 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{D5065F37-A943-D763-6DC5-DDAA2D252B09}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "HashFunction",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+		}
+	]
+}
