@@ -1,5 +1,4 @@
 // do more for timing tests
-#define ITERATIONS 256
 
 // convert 2D seed to 1D
 // 2 imad
@@ -44,7 +43,7 @@ uint xorshift32(uint v) {
 // 7 ALU ops per round
 #define XORSHIFT128 1
 uint xorshift128(uint2 p) {
-    uvec4 v = uvec4(p, p);
+    uint4 v = uint4(p, p);
     for(int i=0; i < XORSHIFT128; ++i) {
         v.w ^= v.w << 11u;
         v.w ^= v.w >> 8u;

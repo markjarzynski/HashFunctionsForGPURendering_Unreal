@@ -1,1 +1,19 @@
 #include "/Project/Random.ush"
+
+#define ITERATIONS 100
+
+uint test_bbs( uint v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = bbs(v);
+    }
+
+    return v;
+}
+
+float test_ign( float2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = ign(v).xx;
+    }
+
+    return v;
+}
