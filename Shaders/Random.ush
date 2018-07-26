@@ -6,66 +6,6 @@ uint seed(uint2 p) {
     return 19u * p.x + 47u * p.y + 101u;
 }
 
-// linear congruential generator
-// seed + 1 imad
-uint lcg(uint2 p) {
-    return seed(p) * 1664525u + 1013904223u;
-}
-
-// Tiny Encryption Algorithm
-//  - Zafar et al., GPU random numbers via the tiny encryption algorithm, HPG 2010
-// 13 iops per iteration
-// 26 for 2 (barely passable for noise)
-// 78 for 6
-uint2 tea(uint tea, uint3 p) {
-    uint s = p.z;
-
-    for( uint i = 0; i < tea; i++) {
-        s += 0x9E3779B9u;
-        p.x += (p.y<<4u)^(p.y+s)^(p.y>>5u);
-        p.y += (p.x<<4u)^(p.x+s)^(p.x>>5u);
-    }
-    return p.xy;
-}
-
-// 32-bit xorshift
-//  - Marsaglia, Xorshift RNGs, Journal of Statistical Software, v8n14, 2003
-// seed + 6 iops
-uint xorshift32(uint v) {
-    v ^= v << 13u;
-    v ^= v >> 17u;
-    v ^= v << 5u;
-    return v;
-}
-
-// 128-bit xorshift
-//  - Marsaglia, Xorshift RNGs, Journal of Statistical Software, v8n14, 2003
-// 7 ALU ops per round
-#define XORSHIFT128 1
-uint xorshift128(uint2 p) {
-    uint4 v = uint4(p, p);
-    for(int i=0; i < XORSHIFT128; ++i) {
-        v.w ^= v.w << 11u;
-        v.w ^= v.w >> 8u;
-        v = v.wxyz;
-        v.x ^= v.y;
-        v.x ^= v.y >> 19u;
-    }
-    return v.x;
-}
-
-// Wang hash, described on http://burtleburtle.net/bob/hash/integer.html
-// original page by Thomas Wang 404
-// seed + 9 iops
-uint wang(uint v) {
-    v = (v ^ 61u) ^ (v >> 16u);
-    v *= 9u;
-    v ^= v >> 4u;
-    v *= 0x27d4eb2du;
-    v ^= v >> 15u;
-    return v;
-}
-
 // BBS-inspired hash
 //  - Olano, Modified Noise for Evaluation on Graphics Hardware, GH 2005
 // seed + 2 iops + 3 imod
@@ -76,20 +16,6 @@ uint bbs(uint v) {
     return v;
 }
 
-// common GLSL hash
-//  - Rey, On generating random numbers, with help of y= [(a+x)sin(bx)] mod 1,
-//    22nd European Meeting of Statisticians and the 7th Vilnius Conference on
-//    Probability Theory and Mathematical Statistics, August 1998
-// 4 flop, 1 fsin, 1 frac
-/*
-uint2 trig(uint2 p) {
-    return uint2(float(0xffffff)*frac(43757.5453*sin(dot(float2(p),float2(12.9898,78.233)))));
-}
-*/
-float trig(float2 p) {
-    return frac(43757.5453*sin(dot(p, float2(12.9898,78.233))));
-}
-
 // Interleaved Gradient Noise
 //  - Jimenez, Next Generation Post Processing in Call of Duty: Advanced Warfare
 //    Advances in Real-time Rendering, SIGGRAPH 2014
@@ -97,6 +23,33 @@ float trig(float2 p) {
 float ign(float2 v) {
     float3 magic = float3(0.06711056f, 0.00583715f, 52.9829189f);
     return frac(magic.z * frac(dot(v, magic.xy)));
+}
+
+// Inigo Quilez integer hash from https://www.shadertoy.com/view/XlXcW4
+uint3 iqint(uint3 v) {
+    v = ((v>>8U)^v.yzx)*1103515245u;
+    v = ((v>>8U)^v.yzx)*1103515245u;
+    v = ((v>>8U)^v.yzx)*1103515245u;
+    return v;
+}
+
+uint jkiss32(uint2 p)
+{
+    uint x=p.x;//123456789;
+    uint y=p.y;//234567891;
+
+    uint z=345678912,w=456789123,c=0;
+    int t;
+    y ^= (y<<5); y ^= (y>>7); y ^= (y<<22);
+    t = z+w+c; z = w; c = t < 0; w = t&2147483647;
+    x += 1411392427;
+    return x + y + w;
+}
+
+// linear congruential generator
+// seed + 1 imad
+uint lcg(uint2 p) {
+    return seed(p) * 1664525u + 1013904223u;
 }
 
 // 9 imad (+ 6 iops with final shuffle)
@@ -130,14 +83,7 @@ uint3 pcg3d16(uint3 v) {
     return v;
 }
 
-// Inigo Quilez integer hash from https://www.shadertoy.com/view/XlXcW4
-uint3 iqint(uint3 v) {
-    v = ((v>>8U)^v.yzx)*1103515245u;
-    v = ((v>>8U)^v.yzx)*1103515245u;
-    v = ((v>>8U)^v.yzx)*1103515245u;
-    return v;
-}
-
+// Numerical Recipies 3rd Edition
 uint ranlim32(uint2 p){
     uint j, u, v, w1, w2, x, y;
 
@@ -175,15 +121,70 @@ uint sca08(uint s) {
     return s;
 }
 
-uint jkiss32(uint2 p)
-{
-    uint x=p.x;//123456789;
-    uint y=p.y;//234567891;
+// Tiny Encryption Algorithm
+//  - Zafar et al., GPU random numbers via the tiny encryption algorithm, HPG 2010
+// 13 iops per iteration
+// 26 for 2 (barely passable for noise)
+// 78 for 6
+uint2 tea(uint tea, uint3 p) {
+    uint s = p.z;
 
-    uint z=345678912,w=456789123,c=0;
-    int t;
-    y ^= (y<<5); y ^= (y>>7); y ^= (y<<22);
-    t = z+w+c; z = w; c = t < 0; w = t&2147483647;
-    x += 1411392427;
-    return x + y + w;
+    for( uint i = 0; i < tea; i++) {
+        s += 0x9E3779B9u;
+        p.x += (p.y<<4u)^(p.y+s)^(p.y>>5u);
+        p.y += (p.x<<4u)^(p.x+s)^(p.x>>5u);
+    }
+    return p.xy;
+}
+
+// common GLSL hash
+//  - Rey, On generating random numbers, with help of y= [(a+x)sin(bx)] mod 1,
+//    22nd European Meeting of Statisticians and the 7th Vilnius Conference on
+//    Probability Theory and Mathematical Statistics, August 1998
+// 4 flop, 1 fsin, 1 frac
+/*
+uint2 trig(uint2 p) {
+    return uint2(float(0xffffff)*frac(43757.5453*sin(dot(float2(p),float2(12.9898,78.233)))));
+}
+*/
+float trig(float2 p) {
+    return frac(43757.5453*sin(dot(p, float2(12.9898,78.233))));
+}
+
+// Wang hash, described on http://burtleburtle.net/bob/hash/integer.html
+// original page by Thomas Wang 404
+// seed + 9 iops
+uint wang(uint v) {
+    v = (v ^ 61u) ^ (v >> 16u);
+    v *= 9u;
+    v ^= v >> 4u;
+    v *= 0x27d4eb2du;
+    v ^= v >> 15u;
+    return v;
+}
+
+// 128-bit xorshift
+//  - Marsaglia, Xorshift RNGs, Journal of Statistical Software, v8n14, 2003
+// 7 ALU ops per round
+#define XORSHIFT128 1
+uint xorshift128(uint2 p) {
+    uint4 v = uint4(p, p);
+    for(int i=0; i < XORSHIFT128; ++i) {
+        v.w ^= v.w << 11u;
+        v.w ^= v.w >> 8u;
+        v = v.wxyz;
+        v.x ^= v.y;
+        v.x ^= v.y >> 19u;
+    }
+    return v.x;
+}
+
+// 32-bit xorshift
+//  - Marsaglia, Xorshift RNGs, Journal of Statistical Software, v8n14, 2003
+// seed + 6 iops
+uint xorshift32(uint v) {
+    v ^= v << 13u;
+    v ^= v >> 17u;
+    v ^= v << 5u;
+    return v;
 }

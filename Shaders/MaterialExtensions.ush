@@ -15,5 +15,137 @@ float test_ign( float2 v ) {
         v = ign(v).xx;
     }
 
+    return v.y;
+}
+
+uint3 test_iqint( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint(v);
+    }
+
+    return v;
+}
+
+uint test_jkiss32( uint2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = jkiss32(v).xx;
+    }
+
+    return v.y;
+}
+
+uint test_lcg( uint2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = lcg(v).xx;
+    }
+
+    return v.y;
+}
+
+uint3 test_pcg3d( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg3d(v);
+    }
+
+    return v;
+}
+
+uint3 test_pcg3d16( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg3d16(v);
+    }
+
+    return v;
+}
+
+float test_PseudoRandom( float2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = PseudoRandom(v).xx;
+    }
+
+    return v.y;
+}
+
+uint3 test_Rand3DPCG16( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = Rand3DPCG16(v);
+    }
+
+    return v;
+}
+
+uint3 test_Rand3DPCG32( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = Rand3DPCG32(v);
+    }
+
+    return v;
+}
+
+uint test_ranlim32( uint2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = ranlim32(v).xx;
+    }
+
+    return v.y;
+}
+
+uint test_sca08( uint v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = sca08(v);
+    }
+
+    return v;
+}
+
+uint2 test_tea( uint tea, uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+
+        //v = tea(tea,v).xyy;
+
+        uint3 p = v;
+        uint s = p.z;
+
+        for( uint i = 0; i < tea; i++) {
+            s += 0x9E3779B9u;
+            p.x += (p.y<<4u)^(p.y+s)^(p.y>>5u);
+            p.y += (p.x<<4u)^(p.x+s)^(p.x>>5u);
+        }
+
+        v = p.xyy;
+    }
+
+    return v.xy;
+}
+
+float test_trig( float2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = trig(v).xx;
+    }
+
+    return v.y;
+}
+
+uint test_wang(uint v) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = wang(v);
+    }
+
+    return v;
+}
+
+uint test_xorshift128(uint2 v) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xorshift128(v).xx;
+    }
+
+    return v.y;
+}
+
+uint test_xorshift32(uint v) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xorshift32(v);
+    }
+
     return v;
 }
