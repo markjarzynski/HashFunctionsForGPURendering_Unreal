@@ -1,10 +1,47 @@
 // do more for timing tests
 
+// Commonly used constants
+#define c1 0xcc9e2d51u
+#define c2 0x1b873593u
+
+// Helper Functions
+uint rotl(uint x, uint r)
+{
+	return (x << r) | (x >> (32u - r));
+}
+
+uint rotr(uint x, uint r)
+{
+	return (x >> r) | (x << (32u - r));
+}
+
+uint fmix(uint h)
+{
+  h ^= h >> 16;
+  h *= 0x85ebca6bu;
+  h ^= h >> 13;
+  h *= 0xc2b2ae35u;
+  h ^= h >> 16;
+  return h;
+}
+
+uint mur(uint a, uint h) {
+  // Helper from Murmur3 for combining two 32-bit values.
+  a *= c1;
+  a = rotr(a, 17u);
+  a *= c2;
+  h ^= a;
+  h = rotr(h, 19u);
+  return h * 5u + 0xe6546b64u;
+}
+
 // convert 2D seed to 1D
 // 2 imad
 uint seed(uint2 p) {
     return 19u * p.x + 47u * p.y + 101u;
 }
+
+// Hashes
 
 // BBS-inspired hash
 //  - Olano, Modified Noise for Evaluation on Graphics Hardware, GH 2005
@@ -16,6 +53,22 @@ uint bbs(uint v) {
     return v;
 }
 
+// CityHash32, adapted from Hash32Len0to4 in https://github.com/google/cityhash
+uint city(uint s)
+{
+    uint len = 4u;
+	uint b = 0u;
+    uint c = 9u;
+
+    for (uint i = 0u; i < len; i++) {
+    	uint v = (s >> (i * 8u)) & 0xffu;
+        b = b * c1 + v;
+        c ^= b;
+    }
+
+    return fmix(mur(b, mur(len, c)));
+}
+
 // Interleaved Gradient Noise
 //  - Jimenez, Next Generation Post Processing in Call of Duty: Advanced Warfare
 //    Advances in Real-time Rendering, SIGGRAPH 2014
@@ -25,12 +78,41 @@ float ign(float2 v) {
     return frac(magic.z * frac(dot(v, magic.xy)));
 }
 
-// Inigo Quilez integer hash from https://www.shadertoy.com/view/XlXcW4
-uint3 iqint(uint3 v) {
-    v = ((v>>8U)^v.yzx)*1103515245u;
-    v = ((v>>8U)^v.yzx)*1103515245u;
-    v = ((v>>8U)^v.yzx)*1103515245u;
-    return v;
+// Integer Hash - I
+// - Inigo Quilez, Integer Hash - I, 2017
+//   https://www.shadertoy.com/view/llGSzw
+uint iqint1(uint n)
+{
+    // integer hash copied from Hugo Elias
+	n = (n << 13U) ^ n;
+    n = n * (n * n * 15731U + 789221U) + 1376312589U;
+
+    return n;
+}
+
+// Integer Hash - II
+// - Inigo Quilez, Integer Hash - II, 2017
+//   https://www.shadertoy.com/view/XlXcW4
+uint3 iqint2(uint3 x)
+{
+    const uint k = 1103515245u;
+
+    x = ((x>>8U)^x.yzx)*k;
+    x = ((x>>8U)^x.yzx)*k;
+    x = ((x>>8U)^x.yzx)*k;
+
+    return x;
+}
+
+// Integer Hash - III
+// - Inigo Quilez, Integer Hash - III, 2017
+//   https://www.shadertoy.com/view/4tXyWN
+uint iqint3(uint2 x)
+{
+    uint2 q = 1103515245U * ( (x>>1U) ^ (x.yx   ) );
+    uint  n = 1103515245U * ( (q.x  ) ^ (q.y>>3U) );
+
+    return n;
 }
 
 uint jkiss32(uint2 p)
@@ -50,6 +132,30 @@ uint jkiss32(uint2 p)
 // seed + 1 imad
 uint lcg(uint2 p) {
     return seed(p) * 1664525u + 1013904223u;
+}
+
+// Adapted from MurmurHas3_x86_32 from https://github.com/aappleby/smhasher
+uint murmur3(uint2 seed)
+{
+    uint h = seed.x;
+    uint k = seed.y;
+
+    k *= c1;
+    k = uint(rotl(k,15u));
+    k *= c2;
+
+    h ^= k;
+
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    h ^= h >> 16u;
+    h *= 0x85ebca6bu;
+    h ^= h >> 13u;
+    h *= 0xc2b2ae35u;
+    h ^= h >> 16u;
+
+    return h;
 }
 
 // 9 imad (+ 6 iops with final shuffle)
@@ -121,6 +227,27 @@ uint sca08(uint s) {
     return s;
 }
 
+// SuperFastHash, adapated from http://www.azillionmonkeys.com/qed/hash.html
+uint superfast(uint data)
+{
+	uint hash = 4u, tmp;
+
+    hash += data & 0xffffu;
+    tmp = (((data >> 16) & 0xffffu) << 11) ^ hash;
+    hash = (hash << 16) ^ tmp;
+    hash += hash >> 11;
+
+    /* Force "avalanching" of final 127 bits */
+    hash ^= hash << 3;
+    hash += hash >> 5;
+    hash ^= hash << 4;
+    hash += hash >> 17;
+    hash ^= hash << 25;
+    hash += hash >> 6;
+
+    return hash;
+}
+
 // Tiny Encryption Algorithm
 //  - Zafar et al., GPU random numbers via the tiny encryption algorithm, HPG 2010
 // 13 iops per iteration
@@ -186,5 +313,68 @@ uint xorshift32(uint v) {
     v ^= v << 13u;
     v ^= v >> 17u;
     v ^= v << 5u;
+    return v;
+}
+
+// Hash without Sine, https://www.shadertoy.com/view/4djSRW
+float3 hashwithoutsine(float2 p)
+{
+	float3 p3 = fract(float3(p.xyx) * float3(.1031, .1030, .0973));
+    p3 += dot(p3, p3.yxz+19.19);
+    return fract((p3.xxy+p3.yzz)*p3.zyx);
+}
+
+uint taus(uint z, int s1, int s2, int s3, uint m)
+{
+	uint b = (((z << s1) ^ z) >> s2);
+    return (((z & m) << s3) ^ b);
+}
+
+// https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch37.html
+uint hybridtaus(uint4 z)
+{
+    for (int i = 0; i < 1; i++) {
+        z.x = taus(z.x, 13, 19, 12, 4294967294u);
+        z.y = taus(z.y, 2, 25, 4, 4294967288u);
+        z.z = taus(z.z, 3, 11, 17, 4294967280u);
+        z.w = z.w * 1664525u + 1013904223u;
+    }
+
+    return z.x ^ z.y ^ z.z ^ z.w;
+}
+
+uint2 pcg2d(uint2 v)
+{
+    v = v * 1664525u + 1013904223u;
+
+    v.x += v.y * 1664525u;
+    v.y += v.x * 1664525u;
+
+    v = v ^ (v>>16u);
+
+    v.x += v.y * 1664525u;
+    v.y += v.x * 1664525u;
+
+    v = v ^ (v>>16u);
+
+    return v;
+}
+
+uint4 pcg4d(uint4 v)
+{
+	v = v * 1664525u + 1013904223u;
+
+    v.x += v.y*v.w;
+    v.y += v.z*v.x;
+    v.z += v.x*v.y;
+    v.w += v.y*v.z;
+
+    v.x += v.y*v.w;
+    v.y += v.z*v.x;
+    v.z += v.x*v.y;
+    v.w += v.y*v.z;
+
+    v = v ^ (v>>16u);
+
     return v;
 }
