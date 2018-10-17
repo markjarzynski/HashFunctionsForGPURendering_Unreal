@@ -10,6 +10,20 @@ uint test_bbs( uint v ) {
     return v;
 }
 
+uint test_city( uint v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = city(v);
+    }
+    return v;
+}
+
+float test_RandFast ( float2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = RandFast(v).xx;
+    }
+    return v.x;
+}
+
 float test_ign( float2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = ign(v).xx;
@@ -18,11 +32,25 @@ float test_ign( float2 v ) {
     return v.x;
 }
 
-uint3 test_iqint( uint3 v ) {
+uint test_iqint1( uint v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = iqint(v);
+        v = iqint1(v);
+    }
+    return v;
+}
+
+uint3 test_iqint2( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint2(v);
     }
 
+    return v;
+}
+
+uint test_iqint3( uint v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint3(v);
+    }
     return v;
 }
 
@@ -40,6 +68,13 @@ uint test_lcg( uint2 v ) {
     }
 
     return v.y;
+}
+
+uint test_murmur3( uint2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = murmur3(v).xx;
+    }
+    return v.x;
 }
 
 uint3 test_pcg3d( uint3 v ) {
@@ -98,6 +133,13 @@ uint test_sca08( uint v ) {
     return v;
 }
 
+uint test_superfast( uint v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = superfast(v);
+    }
+    return v;
+}
+
 uint2 test_tea( uint tea, uint3 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
 
@@ -148,4 +190,32 @@ uint test_xorshift32(uint v) {
     }
 
     return v;
+}
+
+float3 test_hashwithoutsine( float2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = hashwithoutsine(v.xy);
+    }
+    return v;
+}
+
+uint test_hybridtaus( uint4 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = hybridtaus(v).xxxx;
+    }
+    return v.x;
+}
+
+uint test_pcg2d( uint2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg2d(v);
+    }
+    return v.y;
+}
+
+uint3 test_pcg4d( uint4 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg4d(v);
+    }
+    return v.yzw;
 }
