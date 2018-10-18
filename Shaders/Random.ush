@@ -1,9 +1,5 @@
 // do more for timing tests
 
-// Commonly used constants
-#define c1 0xcc9e2d51u
-#define c2 0x1b873593u
-
 // Helper Functions
 uint rotl(uint x, uint r)
 {
@@ -27,6 +23,7 @@ uint fmix(uint h)
 
 uint mur(uint a, uint h) {
   // Helper from Murmur3 for combining two 32-bit values.
+  uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
   a *= c1;
   a = rotr(a, 17u);
   a *= c2;
@@ -56,6 +53,7 @@ uint bbs(uint v) {
 // CityHash32, adapted from Hash32Len0to4 in https://github.com/google/cityhash
 uint city(uint s)
 {
+    uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
     uint len = 4u;
 	uint b = 0u;
     uint c = 9u;
@@ -72,7 +70,7 @@ uint city(uint s)
 // Interleaved Gradient Noise
 //  - Jimenez, Next Generation Post Processing in Call of Duty: Advanced Warfare
 //    Advances in Real-time Rendering, SIGGRAPH 2014
-// 4 flops + 1 2 fract
+// 4 flops + 1 2 frac
 float ign(float2 v) {
     float3 magic = float3(0.06711056f, 0.00583715f, 52.9829189f);
     return frac(magic.z * frac(dot(v, magic.xy)));
@@ -137,6 +135,7 @@ uint lcg(uint2 p) {
 // Adapted from MurmurHas3_x86_32 from https://github.com/aappleby/smhasher
 uint murmur3(uint2 seed)
 {
+    uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
     uint h = seed.x;
     uint k = seed.y;
 
@@ -319,9 +318,9 @@ uint xorshift32(uint v) {
 // Hash without Sine, https://www.shadertoy.com/view/4djSRW
 float3 hashwithoutsine(float2 p)
 {
-	float3 p3 = fract(float3(p.xyx) * float3(.1031, .1030, .0973));
+	float3 p3 = frac(float3(p.xyx) * float3(.1031, .1030, .0973));
     p3 += dot(p3, p3.yxz+19.19);
-    return fract((p3.xxy+p3.yzz)*p3.zyx);
+    return frac((p3.xxy+p3.yzz)*p3.zyx);
 }
 
 uint taus(uint z, int s1, int s2, int s3, uint m)

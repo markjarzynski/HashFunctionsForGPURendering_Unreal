@@ -188,11 +188,10 @@ uint test_xorshift32(uint v) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = xorshift32(v);
     }
-
     return v;
 }
 
-float3 test_hashwithoutsine( float2 v ) {
+float3 test_hashwithoutsine( float3 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine(v.xy);
     }
