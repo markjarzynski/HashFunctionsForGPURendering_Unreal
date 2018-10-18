@@ -17,7 +17,7 @@ uint test_city( uint v ) {
     return v;
 }
 
-float test_RandFast ( float2 v ) {
+float test_RandFast ( uint2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = RandFast(v).xx;
     }
@@ -45,6 +45,30 @@ uint3 test_iqint2( uint3 v ) {
     }
 
     return v;
+}
+
+uint test_iqint2x( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint2(v).xxx;
+    }
+
+    return v.x;
+}
+
+uint test_iqint2y( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint2(v).yyy;
+    }
+
+    return v.y;
+}
+
+uint test_iqint2z( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint2(v).zzz;
+    }
+
+    return v.z;
 }
 
 uint test_iqint3( uint v ) {
@@ -81,8 +105,35 @@ uint3 test_pcg3d( uint3 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = pcg3d(v);
     }
-
     return v;
+}
+
+float3 test_pcg3df( float3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg3df(v);
+    }
+    return v;
+}
+
+uint test_pcg3dx( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg3d(v).xxx;
+    }
+    return v.x;
+}
+
+uint test_pcg3dy( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg3d(v).yyy;
+    }
+    return v.y;
+}
+
+uint test_pcg3dz( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg3d(v).zzz;
+    }
+    return v.z;
 }
 
 uint3 test_pcg3d16( uint3 v ) {
@@ -117,6 +168,14 @@ uint3 test_Rand3DPCG32( uint3 v ) {
     return v;
 }
 
+uint3 test_Rand4DPCG32( uint4 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = Rand4DPCG32(v);
+    }
+
+    return v.yzw;
+}
+
 uint test_ranlim32( uint2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = ranlim32(v).xx;
@@ -140,23 +199,10 @@ uint test_superfast( uint v ) {
     return v;
 }
 
-uint2 test_tea( uint tea, uint3 v ) {
+uint2 test_tea( uint t, uint2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-
-        //v = tea(tea,v).xyy;
-
-        uint3 p = v;
-        uint s = p.z;
-
-        for( uint i = 0; i < tea; i++) {
-            s += 0x9E3779B9u;
-            p.x += (p.y<<4u)^(p.y+s)^(p.y>>5u);
-            p.y += (p.x<<4u)^(p.x+s)^(p.x>>5u);
-        }
-
-        v = p.xyy;
+        v = tea(t,v);
     }
-
     return v.xy;
 }
 
@@ -189,6 +235,13 @@ uint test_xorshift32(uint v) {
         v = xorshift32(v);
     }
     return v;
+}
+
+uint test_xxhash32(uint2 v) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xxhash32(v).xx;
+    }
+    return v.x;
 }
 
 float3 test_hashwithoutsine( float3 v ) {
