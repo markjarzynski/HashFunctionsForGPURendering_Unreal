@@ -144,6 +144,27 @@ uint3 test_pcg3d16( uint3 v ) {
     return v;
 }
 
+uint test_pcg3d16x( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg3d16(v).xxx;
+    }
+    return v.x;
+}
+
+uint test_pcg3d16y( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg3d16(v).yyy;
+    }
+    return v.y;
+}
+
+uint test_pcg3d16z( uint3 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg3d(v).zzz;
+    }
+    return v.z;
+}
+
 float test_PseudoRandom( float2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = PseudoRandom(v).xx;
@@ -204,6 +225,20 @@ uint2 test_tea( uint t, uint2 v ) {
         v = tea(t,v);
     }
     return v.xy;
+}
+
+uint test_teax( uint t, uint2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = tea(t,v).xx;
+    }
+    return v.x;
+}
+
+uint test_teay( uint t, uint2 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = tea(t,v).yy;
+    }
+    return v.y;
 }
 
 float test_trig( float2 v ) {
@@ -270,4 +305,32 @@ uint3 test_pcg4d( uint4 v ) {
         v = pcg4d(v);
     }
     return v.yzw;
+}
+
+uint test_pcg4dx( uint4 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg4d(v).xxxx;
+    }
+    return v.x;
+}
+
+uint test_pcg4dy( uint4 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg4d(v).yyyy;
+    }
+    return v.y;
+}
+
+uint test_pcg4dz( uint4 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg4d(v).zzzz;
+    }
+    return v.z;
+}
+
+uint test_pcg4dw( uint4 v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg4d(v).wwww;
+    }
+    return v.w;
 }
