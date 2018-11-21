@@ -108,12 +108,14 @@ uint3 test_pcg3d( uint3 v ) {
     return v;
 }
 
+/*
 float3 test_pcg3df( float3 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = pcg3df(v);
     }
     return v;
 }
+*/
 
 uint test_pcg3dx( uint3 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
@@ -335,16 +337,16 @@ uint test_pcg4dw( uint4 v ) {
     return v.w;
 }
 
-uint test_hash3mul uint v ) {
+uint test_hash3mul( uint v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = hash3add(v).z;
+        v = hash3mul(v).z;
     }
     return v;
 }
 
 uint test_hash3add( uint v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = hash3mul(v).z;
+        v = hash3add(v).z;
     }
     return v;
 }
