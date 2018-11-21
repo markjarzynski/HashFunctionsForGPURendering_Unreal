@@ -205,9 +205,9 @@ uint test_ranlim32( uint2 v ) {
     return v.y;
 }
 
-uint test_sca08( uint v ) {
+uint test_esgtsa( uint v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = sca08(v);
+        v = esgtsa(v);
     }
 
     return v;
@@ -333,4 +333,18 @@ uint test_pcg4dw( uint4 v ) {
         v = pcg4d(v).wwww;
     }
     return v.w;
+}
+
+uint test_hash3mul uint v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = hash3add(v).z;
+    }
+    return v;
+}
+
+uint test_hash3add( uint v ) {
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = hash3mul(v).z;
+    }
+    return v;
 }
