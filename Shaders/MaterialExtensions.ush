@@ -330,14 +330,14 @@ uint test_pcg4dw( uint4 v ) {
 
 uint test_hash3mul( uint v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = hash3add(seed(v)).z;
+        v = hash3mul(v).z;
     }
     return v;
 }
 
 uint test_hash3add( uint v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = hash3mul(v).z;
+        v = hash3add(v).z;
     }
     return v;
 }
