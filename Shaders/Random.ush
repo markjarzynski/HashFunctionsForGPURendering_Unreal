@@ -252,8 +252,8 @@ uint superfast(uint data)
 // 13 iops per iteration
 // 26 for 2 (barely passable for noise)
 // 78 for 6
-uint2 tea(uint tea, uint3 p) {
-    uint s = p.z;
+uint2 tea(uint tea, uint2 p) {
+    uint s = 0u;
 
     for( uint i = 0; i < tea; i++) {
         s += 0x9E3779B9u;
@@ -313,6 +313,19 @@ uint xorshift32(uint v) {
     v ^= v >> 17u;
     v ^= v << 5u;
     return v;
+}
+
+// xxhash (https://github.com/Cyan4973/xxHash)
+//   From https://www.shadertoy.com/view/Xt3cDn
+uint xxhash32(uint2 p)
+{
+    const uint PRIME32_2 = 2246822519U, PRIME32_3 = 3266489917U;
+	const uint PRIME32_4 = 668265263U, PRIME32_5 = 374761393U;
+    uint h32 = p.y + PRIME32_5 + p.x*PRIME32_3;
+    h32 = PRIME32_4*((h32 << 17) | (h32 >> (32 - 17)));
+    h32 = PRIME32_2*(h32^(h32 >> 15));
+    h32 = PRIME32_3*(h32^(h32 >> 13));
+    return h32^(h32 >> 16);
 }
 
 // Hash without Sine, https://www.shadertoy.com/view/4djSRW
@@ -385,6 +398,8 @@ uint3 hash3mul(uint u)
     uint z = y * 48271u;
 
     return uint3(x, y, z);// n * 69621u);
+
+    //return uint3(u, u * 16807u, u * 48271u);
 }
 
 uint3 hash3add(uint u)
@@ -394,4 +409,6 @@ uint3 hash3add(uint u)
     uint z = esgtsa(y + 48271u);
 
     return uint3(x, y, z);
+
+    //return uint3(esgtsa(u),esgtsa(u + 16807u),esgtsa(u + 48271u));
 }

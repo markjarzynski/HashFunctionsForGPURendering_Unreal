@@ -2,24 +2,24 @@
 
 #define ITERATIONS 10000
 
-uint test_bbs( uint v ) {
+uint test_bbs( uint2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = bbs(v);
+        v = bbs(seed(v)).xx;
     }
 
-    return v;
+    return v.x;
 }
 
-uint test_city( uint v ) {
+uint test_city( uint2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = city(v);
+        v = city(seed(v)).xx;
     }
-    return v;
+    return v.x;
 }
 
 float test_RandFast ( uint2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = RandFast(v).xx;
+        v = RandFast(seed(v)).xx;
     }
     return v.x;
 }
@@ -32,11 +32,11 @@ float test_ign( float2 v ) {
     return v.x;
 }
 
-uint test_iqint1( uint v ) {
+uint test_iqint1( uint2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = iqint1(v);
+        v = iqint1(seed(v)).xx;
     }
-    return v;
+    return v.x;
 }
 
 uint3 test_iqint2( uint3 v ) {
@@ -71,11 +71,11 @@ uint test_iqint2z( uint3 v ) {
     return v.z;
 }
 
-uint test_iqint3( uint v ) {
+uint test_iqint3( uint2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = iqint3(v);
+        v = iqint3(seed(v)).xx;
     }
-    return v;
+    return v.x;
 }
 
 uint test_jkiss32( uint2 v ) {
@@ -104,13 +104,6 @@ uint test_murmur3( uint2 v ) {
 uint3 test_pcg3d( uint3 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = pcg3d(v);
-    }
-    return v;
-}
-
-float3 test_pcg3df( float3 v ) {
-    for (int i = 0; i < ITERATIONS; i++) {
-        v = pcg3df(v);
     }
     return v;
 }
@@ -205,19 +198,19 @@ uint test_ranlim32( uint2 v ) {
     return v.y;
 }
 
-uint test_esgtsa( uint v ) {
+uint test_esgtsa( uint2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = esgtsa(v);
+        v = esgtsa(seed(v)).xx;
     }
 
-    return v;
+    return v.x;
 }
 
-uint test_superfast( uint v ) {
+uint test_superfast( uint2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = superfast(v);
+        v = superfast(seed(v)).xx;
     }
-    return v;
+    return v.x;
 }
 
 uint2 test_tea( uint t, uint2 v ) {
@@ -249,12 +242,12 @@ float test_trig( float2 v ) {
     return v.y;
 }
 
-uint test_wang(uint v) {
+uint test_wang(uint2 v) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = wang(v);
+        v = wang(seed(v)).xx;
     }
 
-    return v;
+    return v.x;
 }
 
 uint test_xorshift128(uint2 v) {
@@ -265,11 +258,11 @@ uint test_xorshift128(uint2 v) {
     return v.y;
 }
 
-uint test_xorshift32(uint v) {
+uint test_xorshift32(uint2 v) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = xorshift32(v);
+        v = xorshift32(seed(v)).xx;
     }
-    return v;
+    return v.x;
 }
 
 uint test_xxhash32(uint2 v) {
@@ -335,9 +328,9 @@ uint test_pcg4dw( uint4 v ) {
     return v.w;
 }
 
-uint test_hash3mul uint v ) {
+uint test_hash3mul( uint v ) {
     for (int i = 0; i < ITERATIONS; i++) {
-        v = hash3add(v).z;
+        v = hash3add(seed(v)).z;
     }
     return v;
 }
