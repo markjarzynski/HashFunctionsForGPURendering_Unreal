@@ -304,3 +304,36 @@ uint test_hash3add( uint v ) {
     }
     return v;
 }
+
+
+//
+
+float3 test_iqint2x( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0u);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint2().xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float3 test_iqint2y( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0u);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint2().yyy;
+    }
+
+    return v.y / UINT_MAX;
+}
+
+float3 test_iqint2z( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0u);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint2().zzz;
+    }
+
+    return v.z / UINT_MAX;
+}
