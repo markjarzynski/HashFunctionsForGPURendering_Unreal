@@ -32,6 +32,12 @@ uint mur(uint a, uint h) {
   return h * 5u + 0xe6546b64u;
 }
 
+uint taus(uint z, int s1, int s2, int s3, uint m)
+{
+	uint b = (((z << s1) ^ z) >> s2);
+    return (((z & m) << s3) ^ b);
+}
+
 // convert 2D seed to 1D
 // 2 imad
 uint seed(uint2 p) {
@@ -334,12 +340,6 @@ float3 hashwithoutsine(float2 p)
 	float3 p3 = frac(float3(p.xyx) * float3(.1031, .1030, .0973));
     p3 += dot(p3, p3.yxz+19.19);
     return frac((p3.xxy+p3.yzz)*p3.zyx);
-}
-
-uint taus(uint z, int s1, int s2, int s3, uint m)
-{
-	uint b = (((z << s1) ^ z) >> s2);
-    return (((z & m) << s3) ^ b);
 }
 
 // https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch37.html
