@@ -7,7 +7,7 @@
 float test_bbs( float2 p ) {
 
     uint2 v = uint2(p * UINT_MAX);
-    
+
     for (int i = 0; i < ITERATIONS; i++) {
         v = bbs(seed(v)).xx;
     }
@@ -25,14 +25,24 @@ float test_city( float2 p ) {
     return v.x / UINT_MAX;
 }
 
-float test_RandFast ( float2 p ) {
-    uint2 v = uint2(p * UINT_MAX);
+float test_RandBBSfloat ( float2 p ) {
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = RandFast(v).xx;
+        p = RandBBSfloat(seed(p)).xx;
     }
 
-    return v.x;
+    return p.x;
+}
+
+float test_RandFast ( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+    float f = 3571.0;
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = uint2(RandFast(v).xx * UINT_MAX);
+    }
+
+    return v / UINT_MAX;
 }
 
 float3 test_hashwithoutsine( float2 p ) {
@@ -107,10 +117,10 @@ float test_lcg( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = lcg(v).xx;
+        v = lcg(seed(v)).xx;
     }
 
-    return v.y / UINT_MAX;
+    return v.x / UINT_MAX;
 }
 
 float test_murmur3( float2 p ) {

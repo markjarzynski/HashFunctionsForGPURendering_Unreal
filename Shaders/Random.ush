@@ -134,8 +134,8 @@ uint jkiss32(uint2 p)
 
 // linear congruential generator
 // seed + 1 imad
-uint lcg(uint2 p) {
-    return seed(p) * 1664525u + 1013904223u;
+uint lcg(uint p) {
+    return p * 1664525u + 1013904223u;
 }
 
 // Adapted from MurmurHas3_x86_32 from https://github.com/aappleby/smhasher
@@ -183,7 +183,9 @@ uint3 pcg3d(uint3 v) {
 
 // 9 imad (+ 12 iops with final shuffle), can be done with 16 bit ints
 uint3 pcg3d16(uint3 v) {
+
     v = v * 12829u + 47989u;
+
     v.x += v.y*v.z;
     v.y += v.z*v.x;
     v.z += v.x*v.y;
@@ -191,6 +193,9 @@ uint3 pcg3d16(uint3 v) {
     v.x += v.y*v.z;
     v.y += v.z*v.x;
     v.z += v.x*v.y;
+
+	v >>= 16u;
+
     return v;
 }
 
