@@ -1,12 +1,17 @@
-float test_bbs( float2 p ) {
+#define NESTED
 
-    uint2 v = uint2(p * UINT_MAX);
+float test_bbs( float2 p ) {
+    uint2 v = uint2(p * UINT16_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = bbs(seed(v)).xx;
+        #if defined(NESTED)
+        v = bbs(v.x + bbs(v.y)).xx;
+        #else
+        v = bbs(seed(v)).xx;        
+        #endif
     }
 
-    return v.x / UINT_MAX;
+    return v.x / UINT16_MAX;
 }
 
 float test_city( float2 p ) {
@@ -29,14 +34,11 @@ float test_RandBBSfloat ( float2 p ) {
 }
 
 float test_RandFast ( float2 p ) {
-    uint2 v = uint2(p * UINT_MAX);
-    float f = 3571.0;
-
     for (int i = 0; i < ITERATIONS; i++) {
-        v = uint2(RandFast(v).xx * UINT_MAX);
+        p = RandFast(p).xx;
     }
 
-    return v.x / UINT_MAX;
+    return p.x;
 }
 
 float3 test_hashwithoutsine( float2 p ) {
@@ -377,34 +379,34 @@ float test_pcg3d_z( float2 p ) {
 
 // pcg3d16
 float test_pcg3d16_x( float2 p ) {
-    uint3 v = uint3(p * UINT_MAX, 0u);
+    uint3 v = uint3(p * UINT16_MAX, 0u);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = pcg3d16(v).xxx;
     }
 
-    return v.x / UINT_MAX;
+    return v.x / UINT16_MAX;
 }
 
 float test_pcg3d16_y( float2 p ) {
-    uint3 v = uint3(p * UINT_MAX, 0u);
+    uint3 v = uint3(p * UINT16_MAX, 0u);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = pcg3d16(v).yyy;
     }
 
-    return v.x / UINT_MAX;
+    return v.x / UINT16_MAX;
 }
 
 
 float test_pcg3d16_z( float2 p ) {
-    uint3 v = uint3(p * UINT_MAX, 0u);
+    uint3 v = uint3(p * UINT16_MAX, 0u);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = pcg3d16(v).zzz;
     }
 
-    return v.x / UINT_MAX;
+    return v.x / UINT16_MAX;
 }
 
 // pcg4d
