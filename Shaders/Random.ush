@@ -13,23 +13,23 @@ uint rotr(uint x, uint r)
 
 uint fmix(uint h)
 {
-  h ^= h >> 16;
-  h *= 0x85ebca6bu;
-  h ^= h >> 13;
-  h *= 0xc2b2ae35u;
-  h ^= h >> 16;
-  return h;
+    h ^= h >> 16;
+    h *= 0x85ebca6bu;
+    h ^= h >> 13;
+    h *= 0xc2b2ae35u;
+    h ^= h >> 16;
+    return h;
 }
 
 uint mur(uint a, uint h) {
-  // Helper from Murmur3 for combining two 32-bit values.
-  uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
-  a *= c1;
-  a = rotr(a, 17u);
-  a *= c2;
-  h ^= a;
-  h = rotr(h, 19u);
-  return h * 5u + 0xe6546b64u;
+    // Helper from Murmur3 for combining two 32-bit values.
+    uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
+    a *= c1;
+    a = rotr(a, 17u);
+    a *= c2;
+    h ^= a;
+    h = rotr(h, 19u);
+    return h * 5u + 0xe6546b64u;
 }
 
 uint taus(uint z, int s1, int s2, int s3, uint m)
