@@ -1,27 +1,23 @@
-#define NESTED
-
 float test_bbs( float2 p ) {
     uint2 v = uint2(p * UINT16_MAX);
+    uint s = seed(v);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        #if defined(NESTED)
-        v = bbs(v.x + bbs(v.y)).xx;
-        #else
-        v = bbs(seed(v)).xx;        
-        #endif
+        s = bbs(s);
     }
 
-    return v.x / UINT16_MAX;
+    return s / UINT_MAX;
 }
 
 float test_city( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
-
+    uint s = seed(v);
+    
     for (int i = 0; i < ITERATIONS; i++) {
-        v = city(seed(v)).xx;
+        s = city(s);
     }
 
-    return v.x / UINT_MAX;
+    return s / UINT_MAX;
 }
 
 float test_RandBBSfloat ( float2 p ) {
@@ -71,12 +67,13 @@ float test_ign( float2 v ) {
 
 float test_iqint1( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
+    uint s = seed(v);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = iqint1(seed(v)).xx;
+        s = iqint1(s);
     }
 
-    return v.x / UINT_MAX;
+    return s / UINT_MAX;
 }
 
 float3 test_iqint2( float2 p ) {
@@ -111,12 +108,13 @@ float test_jkiss32( float2 p ) {
 
 float test_lcg( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
+    uint s = seed(v);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = lcg(seed(v)).xx;
+        s = lcg(s);
     }
 
-    return v.x / UINT_MAX;
+    return s / UINT_MAX;
 }
 
 float test_murmur3( float2 p ) {
@@ -214,27 +212,29 @@ float test_ranlim32( float2 p ) {
         v = ranlim32(v).xx;
     }
 
-    return v.y / UINT_MAX;
+    return v.x / UINT_MAX;
 }
 
 float test_esgtsa( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
+    uint s = seed(v);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = esgtsa(seed(v)).xx;
+        s = esgtsa(s);
     }
 
-    return v.x / UINT_MAX;
+    return s / UINT_MAX;
 }
 
 float test_superfast( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
+    uint s = seed(v);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = superfast(seed(v)).xx;
+        s = superfast(s);
     }
 
-    return v.x / UINT_MAX;
+    return s / UINT_MAX;
 }
 
 float test_tea( uint t, float2 p ) {
@@ -257,12 +257,13 @@ float test_trig( float2 v ) {
 
 float test_wang( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
+    uint s = seed(v);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = wang(seed(v)).xx;
+        s = wang(s);
     }
 
-    return v.x / UINT_MAX;
+    return s / UINT_MAX;
 }
 
 float test_xorshift128( float2 p ) {
@@ -277,12 +278,13 @@ float test_xorshift128( float2 p ) {
 
 float test_xorshift32( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
+    uint s = seed(v);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = xorshift32(seed(v)).xx;
+        s = xorshift32(s);
     }
 
-    return v.x / UINT_MAX;
+    return s / UINT_MAX;
 }
 
 float test_xxhash32( float2 p ) {
@@ -487,6 +489,333 @@ float test_tea_y( uint t, float2 p ) {
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = tea(t,v).yy;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+// Seeded
+
+float test_bbs_seed( float2 p ) {
+    uint2 v = uint2(p * UINT16_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = bbs(seed(v)).xx;
+    }
+
+    return v.x / UINT16_MAX;
+}
+
+float test_city_seed( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = city(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_esgtsa_seed( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = esgtsa(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_iqint1_seed( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint1(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_lcg_seed( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = lcg(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_superfast_seed( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = superfast(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_wang_seed( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = wang(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_xorshift32_seed( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xorshift32(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+// Seeded3
+
+float test_bbs_seed3( float2 p ) {
+    uint3 v = uint3(p * UINT16_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = bbs(seed3(v)).xxx;
+    }
+
+    return v.x / UINT16_MAX;
+}
+
+float test_city_seed3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = city(seed3(v)).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_esgtsa_seed3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = esgtsa(seed3(v)).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_iqint1_seed3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint1(seed3(v)).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_lcg_seed3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = lcg(seed3(v)).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_superfast_seed3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = superfast(seed3(v)).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_wang_seed3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = wang(seed3(v)).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_xorshift32_seed3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xorshift32(seed3(v)).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+// Nested
+
+float test_bbs_nested( float2 p ) {
+    uint2 v = uint2(p * UINT16_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = bbs(bbs(v.x) + v.y).xx;
+    }
+
+    return v.x / UINT16_MAX;
+}
+
+float test_city_nested( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = city(city(v.x) + v.y).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_esgtsa_nested( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = esgtsa(esgtsa(v.x) + v.y).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_iqint1_nested( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint1(iqint1(v.x) + v.y).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_lcg_nested( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = lcg(lcg(v.x) + v.y).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_superfast_nested( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = superfast(superfast(v.x) + v.y).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_wang_nested( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = wang(wang(v.x) + v.y).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_xorshift32_nested( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xorshift32(xorshift32(v.x) + v.y).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+// Nested 3
+float test_bbs_nested3( float2 p ) {
+    uint3 v = uint3(p * UINT16_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = bbs(bbs(bbs(v.x) + v.y) + v.z).xxx;
+    }
+
+    return v.x / UINT16_MAX;
+}
+
+float test_city_nested3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = city(city(city(v.x) + v.y) + v.z).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_esgtsa_nested3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = esgtsa(esgtsa(esgtsa(v.x) + v.y) + v.z).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_iqint1_nested3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint1(iqint1(iqint1(v.x) + v.y) + v.z).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_lcg_nested3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = lcg(lcg(lcg(v.x) + v.y) + v.z).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_superfast_nested3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = superfast(superfast(superfast(v.x) + v.y) + v.z).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_wang_nested3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = wang(wang(wang(v.x) + v.y) + v.z).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_xorshift32_nested3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xorshift32(xorshift32(xorshift32(v.x) + v.y) + v.z).xxx;
     }
 
     return v.x / UINT_MAX;
