@@ -12,7 +12,7 @@ float test_bbs( float2 p ) {
 float test_city( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
     uint s = seed(v);
-    
+
     for (int i = 0; i < ITERATIONS; i++) {
         s = city(s);
     }
@@ -639,7 +639,7 @@ float test_lcg_seed3( float2 p ) {
     return v.x / UINT_MAX;
 }
 
-float test_ranlim32_seed( float2 p ) {
+float test_ranlim32_seed3( float2 p ) {
     uint3 v = uint3(p * UINT_MAX, 0);
 
     for (int i = 0; i < ITERATIONS; i++) {

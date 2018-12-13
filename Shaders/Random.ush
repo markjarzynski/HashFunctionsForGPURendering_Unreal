@@ -46,7 +46,7 @@ uint seed(uint2 p) {
 
 // convert 3D seed to 1D
 uint seed3(uint3 p) {
-    return 19u * p.x + 47u * p.y + 101u * p.z + 131u; 
+    return 19u * p.x + 47u * p.y + 101u * p.z + 131u;
 }
 
 // Hashes
@@ -206,7 +206,7 @@ uint3 pcg3d16(uint3 v) {
 
 // Numerical Recipies 3rd Edition
 uint ranlim32(uint j){
-    uint j, u, v, w1, w2, x, y;
+    uint u, v, w1, w2, x, y;
 
     v = 2244614371U;
     w1 = 521288629U;
