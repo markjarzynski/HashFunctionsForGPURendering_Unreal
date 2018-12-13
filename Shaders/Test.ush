@@ -207,12 +207,13 @@ float3 test_Rand4DPCG32( float2 p ) {
 
 float test_ranlim32( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
+    uint s = seed(v);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = ranlim32(v).xx;
+        s = ranlim32(s);
     }
 
-    return v.x / UINT_MAX;
+    return s / UINT_MAX;
 }
 
 float test_esgtsa( float2 p ) {
@@ -546,6 +547,16 @@ float test_lcg_seed( float2 p ) {
     return v.x / UINT_MAX;
 }
 
+float test_ranlim32_seed( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = ranlim32(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
 float test_superfast_seed( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
@@ -623,6 +634,16 @@ float test_lcg_seed3( float2 p ) {
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = lcg(seed3(v)).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_ranlim32_seed( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = ranlim32(seed3(v)).xxx;
     }
 
     return v.x / UINT_MAX;
@@ -710,6 +731,16 @@ float test_lcg_nested( float2 p ) {
     return v.x / UINT_MAX;
 }
 
+float test_ranlim32_nested( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = ranlim32(ranlim32(v.x) + v.y).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
 float test_superfast_nested( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
@@ -786,6 +817,16 @@ float test_lcg_nested3( float2 p ) {
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = lcg(lcg(lcg(v.x) + v.y) + v.z).xxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_ranlim32_nested3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = ranlim32(ranlim32(ranlim32(v.x) + v.y) + v.z).xxx;
     }
 
     return v.x / UINT_MAX;

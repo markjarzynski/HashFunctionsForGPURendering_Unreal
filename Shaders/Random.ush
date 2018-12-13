@@ -205,10 +205,8 @@ uint3 pcg3d16(uint3 v) {
 }
 
 // Numerical Recipies 3rd Edition
-uint ranlim32(uint2 p){
+uint ranlim32(uint j){
     uint j, u, v, w1, w2, x, y;
-
-    j = seed(p);
 
     v = 2244614371U;
     w1 = 521288629U;
