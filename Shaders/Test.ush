@@ -613,7 +613,8 @@ float test_esgtsa_seed3( float2 p ) {
     uint3 v = uint3(p * UINT_MAX, 0);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = esgtsa(seed3(v)).xxx;
+        v = uint3(esgtsa(seed3(v)), v.x, v.y);
+        //v = esgtsa(seed3(v)).xxx;
     }
 
     return v.x / UINT_MAX;
