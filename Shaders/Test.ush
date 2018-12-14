@@ -541,7 +541,8 @@ float test_lcg_seed( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = lcg(seed(v)).xx;
+        //v = lcg(seed(v)).xx;
+        v = uint2(lcg(seed(v)), v.x);
     }
 
     return v.x / UINT_MAX;
@@ -726,7 +727,8 @@ float test_lcg_nested( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = lcg(lcg(v.x) + v.y).xx;
+        //v = lcg(lcg(v.x) + v.y).xx;
+        v = uint2(lcg(lcg(v.x) + v.y), v.x);
     }
 
     return v.x / UINT_MAX;
