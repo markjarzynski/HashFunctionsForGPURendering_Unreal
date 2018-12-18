@@ -862,3 +862,94 @@ float test_xorshift32_nested3( float2 p ) {
 
     return v.x / UINT_MAX;
 }
+
+// Nested 4
+float test_bbs_nested4( float2 p ) {
+    uint4 v = uint4(p * UINT16_MAX, p * UINT16_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = bbs(bbs(bbs(bbs(v.x) + v.y) + v.z) + v.w).xxxx;
+    }
+
+    return v.x / UINT16_MAX;
+}
+
+float test_city_nested4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = city(city(city(city(v.x) + v.y) + v.z) + v.w).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_esgtsa_nested4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = esgtsa(esgtsa(esgtsa(esgtsa(v.x) + v.y) + v.z) + v.w).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_iqint1_nested4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint1(iqint1(iqint1(iqint1(v.x) + v.y) + v.z) + v.w).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_lcg_nested4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = lcg(lcg(lcg(lcg(v.x) + v.y) + v.z) + v.w).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_ranlim32_nested4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = ranlim32(ranlim32(ranlim32(ranlim32(v.x) + v.y) + v.z) + v.w).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_superfast_nested4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = superfast(superfast(superfast(superfast(v.x) + v.y) + v.z) + v.w).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_wang_nested4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = wang(wang(wang(wang(v.x) + v.y) + v.z) + v.w).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_xorshift32_nested4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xorshift32(xorshift32(xorshift32(xorshift32(v.x) + v.y) + v.z) + v.w).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
