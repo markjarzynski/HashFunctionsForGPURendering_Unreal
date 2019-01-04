@@ -681,6 +681,99 @@ float test_xorshift32_seed3( float2 p ) {
     return v.x / UINT_MAX;
 }
 
+// Linear4
+
+float test_bbs_seed4( float2 p ) {
+    uint4 v = uint4(p * UINT16_MAX, p * UINT16_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = bbs(seed4(v)).xxxx;
+    }
+
+    return v.x / UINT16_MAX;
+}
+
+float test_city_seed4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = city(seed4(v)).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_esgtsa_seed4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        //v = uint3(esgtsa(seed4(v)), v.x, v.y);
+        v = esgtsa(seed4(v)).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_iqint1_seed4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint1(seed4(v)).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_lcg_seed4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = lcg(seed4(v)).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_ranlim32_seed4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = ranlim32(seed4(v)).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_superfast_seed4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = superfast(seed4(v)).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_wang_seed4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = wang(seed4(v)).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_xorshift32_seed4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xorshift32(seed4(v)).xxxx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
 // Nested
 
 float test_bbs_nested( float2 p ) {

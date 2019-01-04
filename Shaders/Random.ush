@@ -49,6 +49,10 @@ uint seed3(uint3 p) {
     return 19u * p.x + 47u * p.y + 101u * p.z + 131u;
 }
 
+uint seed4(uint4 p) {
+	return 19u * p.x + 47u * p.y + 101u * p.z + 131u * p.w + 173u;
+}
+
 // Hashes
 
 // BBS-inspired hash
