@@ -1049,3 +1049,183 @@ float test_xorshift32_nested4( float2 p ) {
 
     return v.x / UINT_MAX;
 }
+
+float2 test_esgtsa_2( float2 p ) {
+    uint2 v = uint2( p * UINT_MAX );
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = uint2(esgtsa(v.x), esgtsa(v.y));
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_esgtsa_3( float2 p ) {
+    uint3 v = uint3( p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = uint3(esgtsa(v.x), esgtsa(v.y), esgtsa(v.z));
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_esgtsa_4( float2 p ) {
+    uint4 v = uint4( p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = uint4(esgtsa(v.x), esgtsa(v.y), esgtsa(v.z), esgtsa(v.w));
+    }
+
+    return (v.xyz ^ v.w) / UINT_MAX;
+}
+
+float2 test_iqint1_2( float2 p ) {
+    uint2 v = uint2( p * UINT_MAX );
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = uint2(iqint1(v.x), iqint1(v.y));
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_iqint1_3( float2 p ) {
+    uint3 v = uint3( p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = uint3(iqint1(v.x), iqint1(v.y), iqint1(v.z));
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_iqint1_4( float2 p ) {
+    uint4 v = uint4( p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = uint4(iqint1(v.x), iqint1(v.y), iqint1(v.z), iqint1(v.w));
+    }
+
+    return (v.xyz ^ v.w) / UINT_MAX;
+}
+
+float2 test_lcg_2( float2 p ) {
+    uint2 v = uint2( p * UINT_MAX );
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = uint2(lcg(v.x), lcg(v.y));
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_lcg_3( float2 p ) {
+    uint3 v = uint3( p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = uint3(lcg(v.x), lcg(v.y), lcg(v.z));
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_lcg_4( float2 p ) {
+    uint4 v = uint4( p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = uint4(lcg(v.x), lcg(v.y), lcg(v.z), lcg(v.w));
+    }
+
+    return (v.xyz ^ v.w) / UINT_MAX;
+}
+
+float2 test_esgtsa_xor2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = esgtsa(v.x * 1597334677u ^ v.y * 3812015801u) * uint2(0x1u, 0x3fffu);
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_esgtsa_xor3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = esgtsa(v.x * 1597334677u ^ v.y * 3812015801u ^ v.z * 3299493293u) * uint3(0x1u, 0x1ffu, 0x3ffffu);
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_esgtsa_xor4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = esgtsa(v.x * 1597334677u ^ v.y * 3812015801u ^ v.z * 3299493293u ^ v.w) * uint4(0x1u, 0x7fu, 0x3fffu, 0x1fffffu);
+    }
+
+    return uint3(v.xyz ^ v.w) / UINT_MAX;
+}
+
+float2 test_iqint1_xor2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint1(v.x * 1597334677u ^ v.y * 3812015801u) * uint2(0x1u, 0x3fffu);
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_iqint1_xor3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint1(v.x * 1597334677u ^ v.y * 3812015801u ^ v.z * 3299493293u) * uint3(0x1u, 0x1ffu, 0x3ffffu);
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_iqint1_xor4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint1(v.x * 1597334677u ^ v.y * 3812015801u ^ v.z * 3299493293u ^ v.w) * uint4(0x1u, 0x7fu, 0x3fffu, 0x1fffffu);
+    }
+
+    return uint3(v.xyz ^ v.w) / UINT_MAX;
+}
+
+float2 test_lcg_xor2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = lcg(v.x * 1597334677u ^ v.y * 3812015801u) * uint2(0x1u, 0x3fffu);
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_lcg_xor3( float2 p ) {
+    uint3 v = uint3(p * UINT_MAX, 0);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = lcg(v.x * 1597334677u ^ v.y * 3812015801u ^ v.z * 3299493293u) * uint3(0x1u, 0x1ffu, 0x3ffffu);
+    }
+
+    return v / UINT_MAX;
+}
+
+float3 test_lcg_xor4( float2 p ) {
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = lcg(v.x * 1597334677u ^ v.y * 3812015801u ^ v.z * 3299493293u ^ v.w) * uint4(0x1u, 0x7fu, 0x3fffu, 0x1fffffu);
+    }
+
+    return uint3(v.xyz ^ v.w) / UINT_MAX;
+}
