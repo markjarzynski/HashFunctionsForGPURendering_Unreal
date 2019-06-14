@@ -1,10 +1,28 @@
+#pragma once
+
+#include "/Project/Random.ush"
+
+float3 Hash_Multiplexer(float3 pos, int Hash)
+{
+    switch(Hash) 
+    {
+        case 0:
+            uint a = lcg(seed3(int3(pos)));
+            return float3(a, a, a);
+        default:
+            return float3(Rand3DPCG16(int3(pos)));
+    }
+    return 0;
+}
+
 // 3D jitter offset within a voronoi noise cell
 // @param pos - integer lattice corner
 // @return random offsets vector
-float3 VoronoiCornerSample2(float3 pos, int Quality)
+float3 myVoronoiCornerSample(float3 pos, int Quality, int Hash)
 {
     // random values in [-0.5, 0.5]
-    float3 noise = float3(Rand3DPCG16(int3(pos))) / 0xffff - 0.5;
+    //float3 noise = float3(Rand3DPCG16(int3(pos))) / 0xffff - 0.5;
+    float3 noise = Hash_Multiplexer(pos, Hash) / 0xffff - 0.5;
 
     // quality level 1 or 2: searches a 2x2x2 neighborhood with points distributed on a sphere
     // scale factor to guarantee jittered points will be found within a 2x2x2 search
@@ -31,7 +49,7 @@ float3 VoronoiCornerSample2(float3 pos, int Quality)
 // @param offset = 3D offset to new candidate seed point
 // @param bDistanceOnly = if true, only set maxval.w with distance, otherwise maxval.w is distance and maxval.xyz is position
 // @return position (if bDistanceOnly is false) and distance to closest seed point so far
-float4 VoronoiCompare2(float4 minval, float3 candidate, float3 offset, bool bDistanceOnly)
+float4 myVoronoiCompare(float4 minval, float3 candidate, float3 offset, bool bDistanceOnly)
 {
     if (bDistanceOnly)
     {
@@ -45,7 +63,7 @@ float4 VoronoiCompare2(float4 minval, float3 candidate, float3 offset, bool bDis
 }
 
 // 220 instruction Worley noise
-float4 VoronoiNoise3D_ALU2(float3 v, int Quality, bool bTiling, float RepeatSize, bool bDistanceOnly)
+float4 myVoronoiNoise3D_ALU(float3 v, int Quality, bool bTiling, float RepeatSize, bool bDistanceOnly, int Hash)
 {
     float3 fv = frac(v),  fv2 = frac(v + 0.5);
     float3 iv = floor(v), iv2 = floor(v + 0.5);
@@ -63,8 +81,8 @@ float4 VoronoiNoise3D_ALU2(float3 v, int Quality, bool bTiling, float RepeatSize
             {
                 UNROLL for (offset.z = -1; offset.z <= 1; ++offset.z)
                 {
-                    p = offset + VoronoiCornerSample2(NoiseTileWrap(iv2 + offset, bTiling, RepeatSize), Quality);
-                    mindist = VoronoiCompare2(mindist, iv2 + p, fv2 - p, bDistanceOnly);
+                    p = offset + myVoronoiCornerSample(NoiseTileWrap(iv2 + offset, bTiling, RepeatSize), Quality, Hash);
+                    mindist = myVoronoiCompare(mindist, iv2 + p, fv2 - p, bDistanceOnly);
                 }
             }
         }
@@ -79,15 +97,15 @@ float4 VoronoiNoise3D_ALU2(float3 v, int Quality, bool bTiling, float RepeatSize
             {
                 UNROLL for (offset.z = 0; offset.z <= 1; ++offset.z)
                 {
-                    p = offset + VoronoiCornerSample2(NoiseTileWrap(iv + offset, bTiling, RepeatSize), Quality);
-                    mindist = VoronoiCompare2(mindist, iv + p, fv - p, bDistanceOnly);
+                    p = offset + myVoronoiCornerSample(NoiseTileWrap(iv + offset, bTiling, RepeatSize), Quality, Hash);
+                    mindist = myVoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
 
                     // quality level 2, do extra set of points, offset by half a cell
                     if (Quality == 2)
                     {
                         // 467 is just an offset to a different area in the random number field to avoid similar neighbor artifacts
-                        p = offset + VoronoiCornerSample2(NoiseTileWrap(iv2 + offset, bTiling, RepeatSize) + 467, Quality);
-                        mindist = VoronoiCompare2(mindist, iv2 + p, fv2 - p, bDistanceOnly);
+                        p = offset + myVoronoiCornerSample(NoiseTileWrap(iv2 + offset, bTiling, RepeatSize) + 467, Quality, Hash);
+                        mindist = myVoronoiCompare(mindist, iv2 + p, fv2 - p, bDistanceOnly);
                     }
                 }
             }
@@ -104,16 +122,16 @@ float4 VoronoiNoise3D_ALU2(float3 v, int Quality, bool bTiling, float RepeatSize
                 UNROLL for (offset.z = 0; offset.z <= 1; ++offset.z)
                 {
                     // along x axis
-                    p = offset.xyz + VoronoiCornerSample2(NoiseTileWrap(iv + offset.xyz, bTiling, RepeatSize), Quality);
-                    mindist = VoronoiCompare2(mindist, iv + p, fv - p, bDistanceOnly);
+                    p = offset.xyz + myVoronoiCornerSample(NoiseTileWrap(iv + offset.xyz, bTiling, RepeatSize), Quality, Hash);
+                    mindist = myVoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
 
                     // along y axis
-                    p = offset.yzx + VoronoiCornerSample2(NoiseTileWrap(iv + offset.yzx, bTiling, RepeatSize), Quality);
-                    mindist = VoronoiCompare2(mindist, iv + p, fv - p, bDistanceOnly);
+                    p = offset.yzx + myVoronoiCornerSample(NoiseTileWrap(iv + offset.yzx, bTiling, RepeatSize), Quality, Hash);
+                    mindist = myVoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
 
                     // along z axis
-                    p = offset.zxy + VoronoiCornerSample2(NoiseTileWrap(iv + offset.zxy, bTiling, RepeatSize), Quality);
-                    mindist = VoronoiCompare2(mindist, iv + p, fv - p, bDistanceOnly);
+                    p = offset.zxy + myVoronoiCornerSample(NoiseTileWrap(iv + offset.zxy, bTiling, RepeatSize), Quality, Hash);
+                    mindist = myVoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
                 }
             }
         }
@@ -122,3 +140,66 @@ float4 VoronoiNoise3D_ALU2(float3 v, int Quality, bool bTiling, float RepeatSize
     // transform squared distance to real distance
     return float4(mindist.xyz, sqrt(mindist.w));
 }
+
+float myNoise3D_Multiplexer(int Function, float3 Position, int Quality, bool bTiling, uint RepeatSize, int Hash)
+{
+    // verified, HLSL compiled out the switch if Function is a constant
+    switch(Function)
+    {
+        case 0:
+            return SimplexNoise3D_TEX(Position);
+        case 1:
+            return GradientNoise3D_TEX(Position, bTiling, RepeatSize);
+        case 2:
+            return FastGradientPerlinNoise3D_TEX(Position);
+        case 3:
+            return GradientNoise3D_ALU(Position, bTiling, RepeatSize);
+        case 4:
+            return ValueNoise3D_ALU(Position, bTiling, RepeatSize);
+        default:
+            return myVoronoiNoise3D_ALU(Position, Quality, bTiling, RepeatSize, true, Hash).w * 2. - 1.;
+    }
+    return 0;
+}
+
+// @param LevelScale usually 2 but higher values allow efficient use of few levels
+// @return in user defined range (OutputMin..OutputMax)
+MaterialFloat myMaterialExpressionNoise(float3 Position, float Scale, int Quality, int Function, bool bTurbulence, uint Levels, float OutputMin, float OutputMax, float LevelScale, float FilterWidth, bool bTiling, float RepeatSize, int Hash)
+{
+    Position *= Scale;
+    FilterWidth *= Scale;
+
+    float Out = 0.0f;
+    float OutScale = 1.0f;
+    float InvLevelScale = 1.0f / LevelScale;
+
+    LOOP for(uint i = 0; i < Levels; ++i)
+    {
+        // fade out noise level that are too high frequent (not done through dynamic branching as it usually requires gradient instructions)
+        OutScale *= saturate(1.0 - FilterWidth);
+
+        if(bTurbulence)
+        {
+            Out += abs(myNoise3D_Multiplexer(Function, Position, Quality, bTiling, RepeatSize, Hash)) * OutScale;
+        }
+        else
+        {
+            Out += myNoise3D_Multiplexer(Function, Position, Quality, bTiling, RepeatSize, Hash) * OutScale;
+        }
+
+        Position *= LevelScale;
+        RepeatSize *= LevelScale;
+        OutScale *= InvLevelScale;
+        FilterWidth *= LevelScale;
+    }
+
+    if(!bTurbulence)
+    {
+        // bring -1..1 to 0..1 range
+        Out = Out * 0.5f + 0.5f;
+    }
+
+    // Out is in 0..1 range
+    return lerp(OutputMin, OutputMax, Out);
+}
+

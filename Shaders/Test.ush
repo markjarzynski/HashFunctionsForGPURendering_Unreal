@@ -1,3 +1,5 @@
+#pragma once
+
 float test_bbs( float2 p ) {
     uint2 v = uint2(p * UINT16_MAX);
     uint s = seed(v);
