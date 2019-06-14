@@ -7,8 +7,9 @@ float3 Hash_Multiplexer(float3 pos, int Hash)
     switch(Hash) 
     {
         case 0:
-            uint a = lcg(seed3(int3(pos)));
-            return float3(a, a, a);
+            return float3(float(lcg(seed3(int3(pos)))));
+        case 1:
+            return float3(float(bbs(seed3(int3(pos)))));
         default:
             return float3(Rand3DPCG16(int3(pos)));
     }
