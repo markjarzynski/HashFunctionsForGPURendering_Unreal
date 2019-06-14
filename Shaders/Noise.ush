@@ -1,0 +1,124 @@
+// 3D jitter offset within a voronoi noise cell
+// @param pos - integer lattice corner
+// @return random offsets vector
+float3 VoronoiCornerSample2(float3 pos, int Quality)
+{
+    // random values in [-0.5, 0.5]
+    float3 noise = float3(Rand3DPCG16(int3(pos))) / 0xffff - 0.5;
+
+    // quality level 1 or 2: searches a 2x2x2 neighborhood with points distributed on a sphere
+    // scale factor to guarantee jittered points will be found within a 2x2x2 search
+    if (Quality <= 2)
+    {
+        return normalize(noise) * 0.2588;
+    }
+
+    // quality level 3: searches a 3x3x3 neighborhood with points distributed on a sphere
+    // scale factor to guarantee jittered points will be found within a 3x3x3 search
+    if (Quality == 3)
+    {
+        return normalize(noise) * 0.3090;
+    }
+
+    // quality level 4: jitter to anywhere in the cell, needs 4x4x4 search
+    return noise;
+}
+
+// compare previous best with a new candidate
+// not producing point locations makes it easier for compiler to eliminate calculations when they're not needed
+// @param minval = location and distance of best candidate seed point before the new one
+// @param candidate = candidate seed point
+// @param offset = 3D offset to new candidate seed point
+// @param bDistanceOnly = if true, only set maxval.w with distance, otherwise maxval.w is distance and maxval.xyz is position
+// @return position (if bDistanceOnly is false) and distance to closest seed point so far
+float4 VoronoiCompare2(float4 minval, float3 candidate, float3 offset, bool bDistanceOnly)
+{
+    if (bDistanceOnly)
+    {
+        return float4(0, 0, 0, min(minval.w, dot(offset, offset)));
+    }
+    else
+    {
+        float newdist = dot(offset, offset);
+        return newdist > minval.w ? minval : float4(candidate, newdist);
+    }
+}
+
+// 220 instruction Worley noise
+float4 VoronoiNoise3D_ALU2(float3 v, int Quality, bool bTiling, float RepeatSize, bool bDistanceOnly)
+{
+    float3 fv = frac(v),  fv2 = frac(v + 0.5);
+    float3 iv = floor(v), iv2 = floor(v + 0.5);
+
+    // with initial minimum distance = infinity (or at least bigger than 4), first min is optimized away
+    float4 mindist = float4(0,0,0,100);
+    float3 p, offset;
+
+    // quality level 3: do a 3x3x3 search
+    if (Quality == 3)
+    {
+        UNROLL for (offset.x = -1; offset.x <= 1; ++offset.x)
+        {
+            UNROLL for (offset.y = -1; offset.y <= 1; ++offset.y)
+            {
+                UNROLL for (offset.z = -1; offset.z <= 1; ++offset.z)
+                {
+                    p = offset + VoronoiCornerSample2(NoiseTileWrap(iv2 + offset, bTiling, RepeatSize), Quality);
+                    mindist = VoronoiCompare2(mindist, iv2 + p, fv2 - p, bDistanceOnly);
+                }
+            }
+        }
+    }
+
+    // everybody else searches a base 2x2x2 neighborhood
+    else
+    {
+        UNROLL for (offset.x = 0; offset.x <= 1; ++offset.x)
+        {
+            UNROLL for (offset.y = 0; offset.y <= 1; ++offset.y)
+            {
+                UNROLL for (offset.z = 0; offset.z <= 1; ++offset.z)
+                {
+                    p = offset + VoronoiCornerSample2(NoiseTileWrap(iv + offset, bTiling, RepeatSize), Quality);
+                    mindist = VoronoiCompare2(mindist, iv + p, fv - p, bDistanceOnly);
+
+                    // quality level 2, do extra set of points, offset by half a cell
+                    if (Quality == 2)
+                    {
+                        // 467 is just an offset to a different area in the random number field to avoid similar neighbor artifacts
+                        p = offset + VoronoiCornerSample2(NoiseTileWrap(iv2 + offset, bTiling, RepeatSize) + 467, Quality);
+                        mindist = VoronoiCompare2(mindist, iv2 + p, fv2 - p, bDistanceOnly);
+                    }
+                }
+            }
+        }
+    }
+
+    // quality level 4: add extra sets of four cells in each direction
+    if (Quality >= 4)
+    {
+        UNROLL for (offset.x = -1; offset.x <= 2; offset.x += 3)
+        {
+            UNROLL for (offset.y = 0; offset.y <= 1; ++offset.y)
+            {
+                UNROLL for (offset.z = 0; offset.z <= 1; ++offset.z)
+                {
+                    // along x axis
+                    p = offset.xyz + VoronoiCornerSample2(NoiseTileWrap(iv + offset.xyz, bTiling, RepeatSize), Quality);
+                    mindist = VoronoiCompare2(mindist, iv + p, fv - p, bDistanceOnly);
+
+                    // along y axis
+                    p = offset.yzx + VoronoiCornerSample2(NoiseTileWrap(iv + offset.yzx, bTiling, RepeatSize), Quality);
+                    mindist = VoronoiCompare2(mindist, iv + p, fv - p, bDistanceOnly);
+
+                    // along z axis
+                    p = offset.zxy + VoronoiCornerSample2(NoiseTileWrap(iv + offset.zxy, bTiling, RepeatSize), Quality);
+                    mindist = VoronoiCompare2(mindist, iv + p, fv - p, bDistanceOnly);
+                }
+            }
+        }
+    }
+
+    // transform squared distance to real distance
+    return float4(mindist.xyz, sqrt(mindist.w));
+}
