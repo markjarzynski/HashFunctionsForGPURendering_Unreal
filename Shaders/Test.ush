@@ -43,7 +43,7 @@ float3 test_hashwithoutsine( float2 p ) {
     float3 v = float3(p, 0.0);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = hashwithoutsine(v.xy);
+        v = hashwithoutsine32(v.xy);
     }
 
     return v;
