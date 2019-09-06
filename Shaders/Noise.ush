@@ -4,7 +4,8 @@
 
 float3 Hash_Multiplexer(float3 pos, int Hash)
 {
-    switch(Hash) 
+    /*
+    switch(Hash)
     {
         case 0:
             return float3(float(lcg(seed3(int3(pos)))));
@@ -13,6 +14,7 @@ float3 Hash_Multiplexer(float3 pos, int Hash)
         default:
             return float3(Rand3DPCG16(int3(pos)));
     }
+    */
     return 0;
 }
 
@@ -203,4 +205,3 @@ MaterialFloat myMaterialExpressionNoise(float3 Position, float Scale, int Qualit
     // Out is in 0..1 range
     return lerp(OutputMin, OutputMax, Out);
 }
-
