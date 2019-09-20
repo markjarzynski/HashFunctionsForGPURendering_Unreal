@@ -14,8 +14,8 @@ class HASHFUNCTION_API UGetMaterialBlueprint : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 	
-    UFUNCTION(BlueprintPure, meta = (DisplayName = "Get All Materials from Directory", CompactNodeTitle = "GetAllMatsFromDir", Keywords = "Get Material"), Category = Game)
-    TArray<UMaterial> GetAllMaterialsFromDirectory( FString directory );
+    UFUNCTION(BlueprintPure, meta = (DisplayName = "Get All Materials from Directory", Keywords = "Get Material"), Category = Game)
+    static TArray<UMaterial*> GetAllMaterialsFromDirectory( FString directory );
 	
 	
 };
