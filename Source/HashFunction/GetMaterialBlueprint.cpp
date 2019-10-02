@@ -3,6 +3,7 @@
 
 #include "GetMaterialBlueprint.h"
 #include "Engine/ObjectLibrary.h"
+#include "Materials/Material.h"
 
 TArray<UMaterial*> UGetMaterialBlueprint::GetAllMaterialsFromDirectory( FString directory )
 {
