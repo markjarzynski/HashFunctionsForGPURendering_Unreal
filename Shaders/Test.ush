@@ -350,11 +350,31 @@ float test_xorshift32( float2 p ) {
     return s / UINT_MAX;
 }
 
-float test_xxhash32( float2 p ) {
+float test_xxhash32_11( float2 p ) {
+    uint v = uint(p.x * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xxhash32(v);
+    }
+
+    return v / UINT_MAX;
+}
+
+float test_xxhash32_12( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = xxhash32(v).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_xxhash32_13( float2 p ) {
+    uint3 v = uint3(p.xyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xxhash32(v).xxx;
     }
 
     return v.x / UINT_MAX;
