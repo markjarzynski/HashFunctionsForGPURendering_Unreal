@@ -95,7 +95,7 @@ float test_hashwithoutsine31 (float2 p) {
 float test_hashwithoutsine32 (float2 p) {
     float3 v = p.xyx;
     for (int i = 0; i < ITERATIONS; i++) {
-        v = hashwithoutsine32(v.xy);
+        v = hashwithoutsine32(v.yx);
     }
     return v;
 }
