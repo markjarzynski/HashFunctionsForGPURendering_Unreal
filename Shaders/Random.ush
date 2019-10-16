@@ -312,13 +312,13 @@ uint wang(uint v) {
 // 128-bit xorshift
 //  - Marsaglia, Xorshift RNGs, Journal of Statistical Software, v8n14, 2003
 // 7 ALU ops per round
-uint xorshift128(uint4 p) {
+uint xorshift128(uint4 v) {
     v.w ^= v.w << 11u;
     v.w ^= v.w >> 8u;
     v = v.wxyz;
     v.x ^= v.y;
     v.x ^= v.y >> 19u;
-    return v;
+    return v.x;
 }
 
 // 32-bit xorshift

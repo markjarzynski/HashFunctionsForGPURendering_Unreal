@@ -51,7 +51,7 @@ float test_hashwithoutsine12 (float2 p) {
     for (int i = 0; i < ITERATIONS; i++) {
         p = hashwithoutsine12(p).xx;
     }
-    return p;
+    return p.x;
 }
 
 float test_hashwithoutsine13 (float2 p) {
@@ -59,21 +59,21 @@ float test_hashwithoutsine13 (float2 p) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine13(v.x);
     }
-    return v;
+    return v.x;
 }
 
 float test_hashwithoutsine21 (float2 p) {
     for (int i = 0; i < ITERATIONS; i++) {
         p = hashwithoutsine21(p.x);
     }
-    return p;
+    return p.x;
 }
 
 float test_hashwithoutsine22 (float2 p) {
     for (int i = 0; i < ITERATIONS; i++) {
         p = hashwithoutsine22(p);
     }
-    return p;
+    return p.x;
 }
 
 float test_hashwithoutsine23 (float2 p) {
@@ -81,7 +81,7 @@ float test_hashwithoutsine23 (float2 p) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine23(v).xyx;
     }
-    return v;
+    return v.x;
 }
 
 float test_hashwithoutsine31 (float2 p) {
@@ -89,7 +89,7 @@ float test_hashwithoutsine31 (float2 p) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine31(v.x);
     }
-    return v;
+    return v.x;
 }
 
 float test_hashwithoutsine32 (float2 p) {
@@ -97,7 +97,7 @@ float test_hashwithoutsine32 (float2 p) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine32(v.yx);
     }
-    return v;
+    return v.x;
 }
 
 float test_hashwithoutsine33 (float2 p) {
@@ -105,9 +105,40 @@ float test_hashwithoutsine33 (float2 p) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine33(v);
     }
-    return v;
+    return v.x;
 }
 
+float test_hashwithoutsine41 (float2 p) {
+    float4 v = p.xyyx;
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = hashwithoutsine41(v.x);
+    }
+    return v.x;
+}
+
+float test_hashwithoutsine42 (float2 p) {
+    float4 v = p.xyyx;
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = hashwithoutsine42(v.xy);
+    }
+    return v.x;
+}
+
+float test_hashwithoutsine43 (float2 p) {
+    float4 v = p.xyyx;
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = hashwithoutsine43(v.xyz);
+    }
+    return v.x;
+}
+
+float test_hashwithoutsine44 (float2 p) {
+    float4 v = p.xyyx;
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = hashwithoutsine44(v);
+    }
+    return v.x;
+}
 
 float test_hybridtaus( float2 p ) {
     uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
@@ -330,10 +361,10 @@ float test_wang( float2 p ) {
 }
 
 float test_xorshift128( float2 p ) {
-    uint2 v = uint2(p * UINT_MAX);
+    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = xorshift128(v).xx;
+        v = xorshift128(v).xxxx;
     }
 
     return v.x / UINT_MAX;
