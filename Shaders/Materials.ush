@@ -1,0 +1,26 @@
+float hash(int seed) {
+    return lcg(seed) / 1.0f * float(0xffffffffu);
+}
+
+float3 brick( float2 uv ) {
+
+    float3 color = float3(0.796, 0.255, 0.329);
+    float offset = 0.05;
+    float2 scale = float2(10,20);
+    
+    uv *= scale;
+
+    uv.x += step(1.0, abs(uv.y) % 2.0) * 0.5;
+    uv.x += step(0.0, uv.y) * 0.5;
+
+    int idx = int(uv.x);
+    uv = frac(uv);
+    
+
+    if (uv.x > 1.0 - offset || uv.y > 1.0 - offset || uv.x < offset || uv.y < offset) {
+        return 0;
+    }
+
+    return hash(idx);
+    
+}
