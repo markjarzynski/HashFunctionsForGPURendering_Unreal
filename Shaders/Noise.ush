@@ -2,19 +2,73 @@
 
 #include "/Project/Random.ush"
 
-float3 Hash_Multiplexer(float3 pos, int Hash)
+uint3 Hash_Multiplexer(int Hash, uint3 pos)
 {
-    /*
     switch(Hash)
     {
         case 0:
-            return float3(float(lcg(seed3(int3(pos)))));
+            return bbs(bbs(bbs(pos.x) + pos.y) + pos.z);
         case 1:
-            return float3(float(bbs(seed3(int3(pos)))));
+            return city(city(city(pos.x) + pos.y) + pos.z);
+        case 2:
+            return esgtsa(esgtsa(esgtsa(pos.x) + pos.y) + pos.z);
+        case 3:
+            return RandFast(pos.xy) * 0xffffffffu;
+        case 4:
+            return hashwithoutsine13(pos) * 0xffffffffu;
+        case 5:
+            return hybridtaus(uint4(pos,0));
+        case 6:
+            return ign(pos.xy) * 0xffffffffu;
+        case 7:
+            return iqint1(iqint1(iqint1(pos.x) + pos.y) + pos.z);
+        case 8:
+            return iqint2(pos);
+        case 9:
+            return iqint3(pos.xy);
+        case 10:
+            return jkiss32(pos.xy);
+        case 11:
+            return lcg(lcg(lcg(pos.x) + pos.y) + pos.z);
+        case 12:
+            return murmur3(pos.xy);
+        case 13:
+            return uint3(pcg2d(pos.xy),0);
+        case 14:
+            return pcg3d(pos);
+        case 15:
+            return pcg3d16(pos);
+        case 16:
+            return pcg4d(uint4(pos,0)).xyz;
+        case 17:
+            return PseudoRandom(pos.xy);
+        case 18:
+            return ranlim32(ranlim32(ranlim32(pos.x) + pos.y) + pos.z);
+        case 19:
+            return superfast(superfast(superfast(pos.x) + pos.y) + pos.z);
+        case 20:
+            return uint3(tea(2,pos.xy), 0);
+        case 21:
+            return uint3(tea(3,pos.xy), 0);
+        case 22:
+            return uint3(tea(4,pos.xy), 0);
+        case 23:
+            return uint3(tea(5,pos.xy), 0);
+        case 24:
+            return uint3(tea(6,pos.xy), 0);
+        case 25:
+            return trig(pos.xy);
+        case 26:
+            return wang(wang(wang(pos.x) + pos.y) + pos.z);
+        case 27:
+            return xorshift128(uint4(pos,0));
+        case 28:
+            return xorshift32(xorshift32(xorshift32(pos.x) + pos.y) + pos.z);
+        case 29:
+            return xxhash32(pos);
         default:
-            return float3(Rand3DPCG16(int3(pos)));
+            return 0;
     }
-    */
     return 0;
 }
 
@@ -25,7 +79,7 @@ float3 myVoronoiCornerSample(float3 pos, int Quality, int Hash)
 {
     // random values in [-0.5, 0.5]
     //float3 noise = float3(Rand3DPCG16(int3(pos))) / 0xffff - 0.5;
-    float3 noise = Hash_Multiplexer(pos, Hash) / 0xffff - 0.5;
+    float3 noise = float3(Hash_Multiplexer(Hash,int3(pos))) / 0xffff - 0.5;
 
     // quality level 1 or 2: searches a 2x2x2 neighborhood with points distributed on a sphere
     // scale factor to guarantee jittered points will be found within a 2x2x2 search
@@ -43,26 +97,6 @@ float3 myVoronoiCornerSample(float3 pos, int Quality, int Hash)
 
     // quality level 4: jitter to anywhere in the cell, needs 4x4x4 search
     return noise;
-}
-
-// compare previous best with a new candidate
-// not producing point locations makes it easier for compiler to eliminate calculations when they're not needed
-// @param minval = location and distance of best candidate seed point before the new one
-// @param candidate = candidate seed point
-// @param offset = 3D offset to new candidate seed point
-// @param bDistanceOnly = if true, only set maxval.w with distance, otherwise maxval.w is distance and maxval.xyz is position
-// @return position (if bDistanceOnly is false) and distance to closest seed point so far
-float4 myVoronoiCompare(float4 minval, float3 candidate, float3 offset, bool bDistanceOnly)
-{
-    if (bDistanceOnly)
-    {
-        return float4(0, 0, 0, min(minval.w, dot(offset, offset)));
-    }
-    else
-    {
-        float newdist = dot(offset, offset);
-        return newdist > minval.w ? minval : float4(candidate, newdist);
-    }
 }
 
 // 220 instruction Worley noise
@@ -85,7 +119,7 @@ float4 myVoronoiNoise3D_ALU(float3 v, int Quality, bool bTiling, float RepeatSiz
                 UNROLL for (offset.z = -1; offset.z <= 1; ++offset.z)
                 {
                     p = offset + myVoronoiCornerSample(NoiseTileWrap(iv2 + offset, bTiling, RepeatSize), Quality, Hash);
-                    mindist = myVoronoiCompare(mindist, iv2 + p, fv2 - p, bDistanceOnly);
+                    mindist = VoronoiCompare(mindist, iv2 + p, fv2 - p, bDistanceOnly);
                 }
             }
         }
@@ -101,14 +135,14 @@ float4 myVoronoiNoise3D_ALU(float3 v, int Quality, bool bTiling, float RepeatSiz
                 UNROLL for (offset.z = 0; offset.z <= 1; ++offset.z)
                 {
                     p = offset + myVoronoiCornerSample(NoiseTileWrap(iv + offset, bTiling, RepeatSize), Quality, Hash);
-                    mindist = myVoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
+                    mindist = VoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
 
                     // quality level 2, do extra set of points, offset by half a cell
                     if (Quality == 2)
                     {
                         // 467 is just an offset to a different area in the random number field to avoid similar neighbor artifacts
                         p = offset + myVoronoiCornerSample(NoiseTileWrap(iv2 + offset, bTiling, RepeatSize) + 467, Quality, Hash);
-                        mindist = myVoronoiCompare(mindist, iv2 + p, fv2 - p, bDistanceOnly);
+                        mindist = VoronoiCompare(mindist, iv2 + p, fv2 - p, bDistanceOnly);
                     }
                 }
             }
@@ -126,15 +160,15 @@ float4 myVoronoiNoise3D_ALU(float3 v, int Quality, bool bTiling, float RepeatSiz
                 {
                     // along x axis
                     p = offset.xyz + myVoronoiCornerSample(NoiseTileWrap(iv + offset.xyz, bTiling, RepeatSize), Quality, Hash);
-                    mindist = myVoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
+                    mindist = VoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
 
                     // along y axis
                     p = offset.yzx + myVoronoiCornerSample(NoiseTileWrap(iv + offset.yzx, bTiling, RepeatSize), Quality, Hash);
-                    mindist = myVoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
+                    mindist = VoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
 
                     // along z axis
                     p = offset.zxy + myVoronoiCornerSample(NoiseTileWrap(iv + offset.zxy, bTiling, RepeatSize), Quality, Hash);
-                    mindist = myVoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
+                    mindist = VoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
                 }
             }
         }
@@ -143,6 +177,112 @@ float4 myVoronoiNoise3D_ALU(float3 v, int Quality, bool bTiling, float RepeatSiz
     // transform squared distance to real distance
     return float4(mindist.xyz, sqrt(mindist.w));
 }
+
+// Simplex noise and its Jacobian derivative
+// @param v = 3D noise argument
+// @param bTiling = whether to repeat noise pattern
+// @param RepeatSize = integer units before tiling in each dimension, must be a multiple of 3
+// @return float3x3 Jacobian in J[*].xyz, vector noise in J[*].w
+//     J[0].w, J[1].w, J[2].w is a Perlin-style simplex noise with vector output, e.g. (Nx, Ny, Nz)
+//     J[i].x is X derivative of the i'th component of the noise so J[2].x is dNz/dx
+// You can use this to compute the noise, gradient, curl, or divergence:
+//   float3x4 J = JacobianSimplex_ALU(...);
+//   float3 VNoise = float3(J[0].w, J[1].w, J[2].w);	// 3D noise
+//   float3 Grad = J[0].xyz;							// gradient of J[0].w
+//   float3 Curl = float3(J[1][2]-J[2][1], J[2][0]-J[0][2], J[0][1]-J[1][2]);
+//   float Div = J[0][0]+J[1][1]+J[2][2];
+// All of these are confirmed to compile out all unneeded terms.
+// So Grad of X doesn't compute Y or Z components, and VNoise doesn't do any of the derivative computation.
+float3x4 myJacobianSimplex_ALU(float3 v, bool bTiling, float RepeatSize, int Hash)
+{
+	// corners of tetrahedron
+	float4x3 T = SimplexCorners(v);
+	uint3 rand;
+	float4x3 gvec[3], fv;
+	float3x4 grad;
+
+	// processing of tetrahedral vertices, unrolled
+	// to compute gradient at each corner
+	fv[0] = v - T[0];
+	rand = Hash_Multiplexer(Hash,int3(floor(NoiseTileWrap(6 * T[0] + 0.5, bTiling, RepeatSize))));
+	gvec[0][0] = float3(rand.xxx & MGradientMask) * MGradientScale - 1;
+	gvec[1][0] = float3(rand.yyy & MGradientMask) * MGradientScale - 1;
+	gvec[2][0] = float3(rand.zzz & MGradientMask) * MGradientScale - 1;
+	grad[0][0] = dot(gvec[0][0], fv[0]);
+	grad[1][0] = dot(gvec[1][0], fv[0]);
+	grad[2][0] = dot(gvec[2][0], fv[0]);
+
+	fv[1] = v - T[1];
+	rand = Hash_Multiplexer(Hash,int3(floor(NoiseTileWrap(6 * T[1] + 0.5, bTiling, RepeatSize))));
+	gvec[0][1] = float3(rand.xxx & MGradientMask) * MGradientScale - 1;
+	gvec[1][1] = float3(rand.yyy & MGradientMask) * MGradientScale - 1;
+	gvec[2][1] = float3(rand.zzz & MGradientMask) * MGradientScale - 1;
+	grad[0][1] = dot(gvec[0][1], fv[1]);
+	grad[1][1] = dot(gvec[1][1], fv[1]);
+	grad[2][1] = dot(gvec[2][1], fv[1]);
+
+	fv[2] = v - T[2];
+	rand = Hash_Multiplexer(Hash,int3(floor(NoiseTileWrap(6 * T[2] + 0.5, bTiling, RepeatSize))));
+	gvec[0][2] = float3(rand.xxx & MGradientMask) * MGradientScale - 1;
+	gvec[1][2] = float3(rand.yyy & MGradientMask) * MGradientScale - 1;
+	gvec[2][2] = float3(rand.zzz & MGradientMask) * MGradientScale - 1;
+	grad[0][2] = dot(gvec[0][2], fv[2]);
+	grad[1][2] = dot(gvec[1][2], fv[2]);
+	grad[2][2] = dot(gvec[2][2], fv[2]);
+
+	fv[3] = v - T[3];
+	rand = Hash_Multiplexer(Hash,int3(floor(NoiseTileWrap(6 * T[3] + 0.5, bTiling, RepeatSize))));
+	gvec[0][3] = float3(rand.xxx & MGradientMask) * MGradientScale - 1;
+	gvec[1][3] = float3(rand.yyy & MGradientMask) * MGradientScale - 1;
+	gvec[2][3] = float3(rand.zzz & MGradientMask) * MGradientScale - 1;
+	grad[0][3] = dot(gvec[0][3], fv[3]);
+	grad[1][3] = dot(gvec[1][3], fv[3]);
+	grad[2][3] = dot(gvec[2][3], fv[3]);
+
+	// blend gradients
+	float4 sv = SimplexSmooth(fv);
+	float3x4 ds = SimplexDSmooth(fv);
+
+	float3x4 jacobian;
+	jacobian[0] = float4(mul(sv, gvec[0]) + mul(ds, grad[0]), dot(sv, grad[0]));
+	jacobian[1] = float4(mul(sv, gvec[1]) + mul(ds, grad[1]), dot(sv, grad[1]));
+	jacobian[2] = float4(mul(sv, gvec[2]) + mul(ds, grad[2]), dot(sv, grad[2]));
+
+	return jacobian;
+}
+
+
+
+// Material node for noise functions returning a vector value
+// @param LevelScale usually 2 but higher values allow efficient use of few levels
+// @return in user defined range (OutputMin..OutputMax)
+MaterialFloat4 myMaterialExpressionVectorNoise(MaterialFloat3 Position, int Quality, int Function, bool bTiling, float TileSize, int Hash)
+{
+	float4 result = float4(0,0,0,1);
+	float3x4 Jacobian = myJacobianSimplex_ALU(Position, bTiling, TileSize, Hash);	// compiled out if not used
+
+	// verified, HLSL compiled out the switch if Function is a constant
+	switch (Function)
+	{
+	case 0:	// Cellnoise
+		result.xyz = float3(Hash_Multiplexer(Hash,(int3(floor(NoiseTileWrap(Position, bTiling, TileSize)))))) / 0xffff;
+		break;
+	case 1: // Color noise
+		result.xyz = float3(Jacobian[0].w, Jacobian[1].w, Jacobian[2].w);
+		break;
+	case 2: // Gradient
+		result = Jacobian[0];
+		break;
+	case 3: // Curl
+		result.xyz = float3(Jacobian[2][1] - Jacobian[1][2], Jacobian[0][2] - Jacobian[2][0], Jacobian[1][0] - Jacobian[0][1]);
+		break;
+	default: // Voronoi
+		result = myVoronoiNoise3D_ALU(Position, Quality, bTiling, TileSize, false, Hash);
+		break;
+	}
+	return result;
+}
+
 
 float myNoise3D_Multiplexer(int Function, float3 Position, int Quality, bool bTiling, uint RepeatSize, int Hash)
 {

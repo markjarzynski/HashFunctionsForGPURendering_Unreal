@@ -1,13 +1,57 @@
-float hash(int seed) {
-    return lcg(seed) / 1.0f * float(0xffffffffu);
-}
-
 float3 brick( float2 uv ) {
 
+    float s = uv.x;;
+    float t = uv.y;
+    float N = 1.;
+    float I = 1.;
+
+    #define BRICKWIDTH 0.25
+    #define BRICKHEIGHT 0.08
+    #define MORTARTHICKNESS 0.01
+    #define BMWIDTH (BRICKWIDTH+MORTARTHICKNESS)
+    #define BMHEIGHT (BRICKHEIGHT+MORTARTHICKNESS)
+    #define MWF (MORTARTHICKNESS+0.5/BMWIDTH)
+    #define MHF (MORTARTHICKNESS+0.5/BMHEIGHT)
+
+    float Ka = 1.;
+    float Kd = 1.;
+    float3 Cbrick = float3(0.5, 0.15, 0.14);
+    float3 Cmortor = float3(0.5, 0.5, 0.5);
+
+    float3 Ct;
+    float2 Nf;
+    float ss, tt, sbrick, tbrick, w, h;
+    float scoord = s;
+    float tcoord = t;
+
+    //Nf = normalize(faceforward(N, I));
+    Nf = 1.;
+
+    ss = scoord / BMWIDTH;
+    tt = tcoord / BMHEIGHT;
+
+    if (fmod(tt*0.5,1) > 0.5)
+        ss += 0.5; /* shift alternate rows */
+    sbrick = floor(ss); /* which brick? */
+    tbrick = floor(tt); /* which brick? */
+    ss -= sbrick;
+    tt -= tbrick;
+    w = step(MWF,ss) - step(1-MWF,ss);
+    h = step(MWF,tt) - step(1-MHF,tt);
+
+    Ct = lerp(Cmortor, Cbrick, w*h);
+
+    return Ct;
+
+    /* diffuse reflection model */
+    //Oi = Os;
+    //Ci = Os * Ct * (Ka * ambient() + Kd * diffuse(Nf));
+
+    /*
     float3 color = float3(0.796, 0.255, 0.329);
     float offset = 0.05;
     float2 scale = float2(10,20);
-    
+
     uv *= scale;
 
     uv.x += step(1.0, abs(uv.y) % 2.0) * 0.5;
@@ -15,12 +59,13 @@ float3 brick( float2 uv ) {
 
     int idx = int(uv.x);
     uv = frac(uv);
-    
+
 
     if (uv.x > 1.0 - offset || uv.y > 1.0 - offset || uv.x < offset || uv.y < offset) {
         return 0;
     }
 
     return hash(idx);
-    
+    */
+
 }
