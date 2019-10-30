@@ -466,12 +466,10 @@ float4 hashwithoutsine44(float4 p4)
 // https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch37.html
 uint hybridtaus(uint4 z)
 {
-    for (int i = 0; i < 1; i++) {
-        z.x = taus(z.x, 13, 19, 12, 4294967294u);
-        z.y = taus(z.y, 2, 25, 4, 4294967288u);
-        z.z = taus(z.z, 3, 11, 17, 4294967280u);
-        z.w = z.w * 1664525u + 1013904223u;
-    }
+    z.x = taus(z.x, 13, 19, 12, 0xfffffffeu);
+    z.y = taus(z.y, 2, 25, 4, 0xfffffff8u);
+    z.z = taus(z.z, 3, 11, 17, 0xfffffff0u);
+    z.w = z.w * 1664525u + 1013904223u;
 
     return z.x ^ z.y ^ z.z ^ z.w;
 }

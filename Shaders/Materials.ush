@@ -1,71 +1,22 @@
-float3 brick( float2 uv ) {
+float3 brick( float3 pos ) {
 
-    float s = uv.x;;
-    float t = uv.y;
-    float N = 1.;
-    float I = 1.;
+    float3 brickStep = float3(0., 0.44, 2.29);
 
-    #define BRICKWIDTH 0.25
-    #define BRICKHEIGHT 0.08
-    #define MORTARTHICKNESS 0.01
-    #define BMWIDTH (BRICKWIDTH+MORTARTHICKNESS)
-    #define BMHEIGHT (BRICKHEIGHT+MORTARTHICKNESS)
-    #define MWF (MORTARTHICKNESS+0.5/BMWIDTH)
-    #define MHF (MORTARTHICKNESS+0.5/BMHEIGHT)
+    float3 brickCol1 = float3(0.60, 0.27, 0.15);
+    float3 brickCol2 = float3(0.45, 0.24, 0.13);
+    float3 brickCol3 = float3(0.29, 0.10, 0.04);
+    
+    float3 pos2 = pos;
+    pos2.yz += 0.07 * pcg3d16(pos * 0.005).g;
+    pos2.z += 0.5 * brickStep.z * floor(0.5 * pos2.y / brickStep.y);
 
-    float Ka = 1.;
-    float Kd = 1.;
-    float3 Cbrick = float3(0.5, 0.15, 0.14);
-    float3 Cmortor = float3(0.5, 0.5, 0.5);
+    float2 nb = floor(pos2.yz / brickStep.yz * float2(0.5, 1.));
+    float nbBrick = nb.x + nb.y * 90.;
+    float nbBrickf = pow(pcg3d16(nbBrick).x, 6.);
 
-    float3 Ct;
-    float2 Nf;
-    float ss, tt, sbrick, tbrick, w, h;
-    float scoord = s;
-    float tcoord = t;
+    float3 brickCol = lerp(brickCol1, brickCol2, nbBrickf);
+    brickCol = lerp(brickCol, brickCol3, pow(smoothstep(0.1, 1.05, 1.2 * pcg3d16(pos * 0.18).x * pcg3d16(pos * 0.23).x), 1.5));
+    brickCol *= 0.4 + 0.6 * smoothstep(0.80, 0.60, pcg3d16(pos * 0.07).b);
 
-    //Nf = normalize(faceforward(N, I));
-    Nf = 1.;
-
-    ss = scoord / BMWIDTH;
-    tt = tcoord / BMHEIGHT;
-
-    if (fmod(tt*0.5,1) > 0.5)
-        ss += 0.5; /* shift alternate rows */
-    sbrick = floor(ss); /* which brick? */
-    tbrick = floor(tt); /* which brick? */
-    ss -= sbrick;
-    tt -= tbrick;
-    w = step(MWF,ss) - step(1-MWF,ss);
-    h = step(MWF,tt) - step(1-MHF,tt);
-
-    Ct = lerp(Cmortor, Cbrick, w*h);
-
-    return Ct;
-
-    /* diffuse reflection model */
-    //Oi = Os;
-    //Ci = Os * Ct * (Ka * ambient() + Kd * diffuse(Nf));
-
-    /*
-    float3 color = float3(0.796, 0.255, 0.329);
-    float offset = 0.05;
-    float2 scale = float2(10,20);
-
-    uv *= scale;
-
-    uv.x += step(1.0, abs(uv.y) % 2.0) * 0.5;
-    uv.x += step(0.0, uv.y) * 0.5;
-
-    int idx = int(uv.x);
-    uv = frac(uv);
-
-
-    if (uv.x > 1.0 - offset || uv.y > 1.0 - offset || uv.x < offset || uv.y < offset) {
-        return 0;
-    }
-
-    return hash(idx);
-    */
-
+    return brickCol;
 }
