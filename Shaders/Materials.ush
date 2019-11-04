@@ -1,4 +1,4 @@
-float udRoundBox(float3 p, float3 b, float r)
+float udRoundBox(float2 p, float2 b, float r)
 {
     return length(max(abs(p) - b, 0.0)) - r;
 }
@@ -7,32 +7,76 @@ float hash( float n ){
 	return frac(sin(n)*3538.5453);
 }
 
+float hash2( float2 n ) {
+    return trig(n);
+}
+
 float3 hash3( float3 n ){
 	return frac(float3(sin(n.x)*3538.5453, sin(n.y)*2753.8256, sin(n.z)*5296.3728));
 }
 
 float3 brick( float3 pos ) {
+    const float3 brickSize = float3(0.2, 0.34, 2.04);
+    const float3 brickStep = float3(0., 0.44, 2.29);
+    const float brickBR = 0.05;
+ 
+    float3 brickCol1 = float3(0.60, 0.27, 0.15);
+    float3 brickCol2 = float3(0.45, 0.24, 0.13);
+    float3 brickCol3 = float3(0.29, 0.10, 0.04);
+    
+    float3 pos2 = pos;
+    pos2.yz += 0.07 * hash2(pos.yz * 0.005);
+    pos2.z += 0.5 * brickStep.z * floor(0.5 * pos2.y / brickStep.y);
+    float2 nb = floor(pos2.yz / brickStep.yz * float2(0.5, 1.));
+    float nbBrick = nb.x + nb.y*90.;
+    float nbBrickf = pow(hash(nbBrick), 6.);
+    float3 brickCol = lerp(brickCol1, brickCol2, nbBrickf);
+    brickCol = lerp(brickCol, brickCol3, pow(smoothstep(0.1, 1.05, 1.2 * hash2(pos.yz * 0.18) * hash2(pos.yz * 0.23)), 1.5));
+    brickCol *= 0.4 + 0.6 * smoothstep(0.80, 0.60, hash2(pos.yz * 0.07));
+    return brickCol;
+    
+    /*
+    const float3 brickSize = float3(0.2, 0.34, 2.04);
+    const float3 brickStep = float3(0., 0.44, 2.29);
+    const float brickBR = 0.05;
+ 
+    float3 brickCol1 = float3(0.60, 0.27, 0.15);
+    float3 brickCol2 = float3(0.45, 0.24, 0.13);
+    float3 brickCol3 = float3(0.29, 0.10, 0.04);
+    
+    float3 pos2 = pos;
+    pos2.yz += 0.07 * hash2(pos.yz * 0.005);
+    pos2.z += 0.5 * brickStep.z * floor(0.5 * pos2.y / brickStep.y);
+    float2 nb = floor(pos2.yz / brickStep.yz * float2(0.5, 1.));
+    float nbBrick = nb.x + nb.y*90.;
+    float nbBrickf = pow(hash(nbBrick), 6.);
+    float3 brickCol = lerp(brickCol1, brickCol2, nbBrickf);
+    brickCol = lerp(brickCol, brickCol3, pow(smoothstep(0.1, 1.05, 1.2 * hash2(pos.yz * 0.18) * hash2(pos.yz * 0.23)), 1.5));
+    brickCol *= 0.4 + 0.6 * smoothstep(0.80, 0.60, hash2(pos.yz * 0.07));
+    return brickCol;
+    */
 
-    float3 brickSize = float3(0.2, 0.34, 2.04);
-    float3 brickStep = float3(0., 0.44, 2.29);
+    /*
+    float2 brickSize = float2(0.34, 2.04);
+    float2 brickStep = float2(0.44, 2.29);
     float brickBR = 0.05;
 
     float3 brickCol1 = float3(0.60, 0.27, 0.15);
     float3 brickCol2 = float3(0.45, 0.24, 0.13);
     float3 brickCol3 = float3(0.29, 0.10, 0.04);
 
-    float3 pos2 = pos;
-    pos2.xy += 0.07*hash3(pos * 0.005).g;
-    pos2.y += 0.5*(brickStep.z + 0.02)*fmod(floor(0.5*pos2.x/brickStep.x), 2.);
+    pos += 0.07 * pcg2d(pos * 0.05).y;
+    pos.y = 0.5 * (brickStep.y + 0.02) * fmod(floor(0.5 * pos.x / brickStep.x), 2.);
 
-    float2 nb = floor(pos2.xy/brickStep.xy*float2(0.5, 1.));
-    float nbBrick = nb.x*2. + nb.y*80.;
+    float2 nb = floor(pos / brickStep * float2(0.5, 1.));
+    float nbBrick = nb.x * 2. + nb.y * 80.;
     float btd = 1. + 0.3 * (hash(nbBrick) - 0.5);
-
-    pos2.yz = fmod(pos2.xy, brickStep.xy*float2(2., 1.));
-    float bricks = udRoundBox(pos2 - float3(brickSize.x*0.5*btd, brickStep.y, 0.), brickSize, brickBR);
+    
+    pos = fmod(pos, brickStep * float2(2., 1.));
+    float bricks = udRoundBox(pos - float2(brickSize.x * 0.5 * btd, brickStep.y), brickSize, brickBR);
 
     return bricks;
+    */
 
     /*
 
@@ -49,6 +93,8 @@ float3 brick( float3 pos ) {
     brickCol *= 0.4 + 0.6 * smoothstep(0.80, 0.60, pcg3d16(pos * 0.07).b);
 
     return brickCol;
+
+
     */
 
 
