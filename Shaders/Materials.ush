@@ -105,6 +105,14 @@ float3 brick( float3 pos ) {
 
 }
 
+float3 brick3_wall( float3 pos, int Hash) {
+
+    return float3(0.65);
+
+    //return float3(0.3 + 0.7 * myMaterialExpressionVectorNoise(0.9 * pos, 1, 2, 0, 300, Hash).r);// * (0.5 + 0.5 * smoothstep(0., 0.12, myMaterialExpressionVectorNoise(0.3 * pos, 1, 2, 0, 300, Hash).r));
+
+}
+
 
 float3 brick3( float3 pos, int Hash) {
     
@@ -116,10 +124,10 @@ float3 brick3( float3 pos, int Hash) {
     float3 brickCol2 = float3(0.45, 0.24, 0.13);
     float3 brickCol3 = float3(0.29, 0.10, 0.04);
  
-    float3 wallColor = float3(0.3 + 0.7 * myMaterialExpressionVectorNoise(0.9 * pos, 1, 2, 0, 300, Hash).r) * (0.5 + 0.5 * smoothstep(0., 0.12, myMaterialExpressionVectorNoise(0.3 * pos, 1, 2, 0, 300, Hash).r));
+    //float3 wallColor = float3(0.3 + 0.7 * myMaterialExpressionVectorNoise(0.9 * pos, 1, 2, 0, 300, Hash).r) * (0.5 + 0.5 * smoothstep(0., 0.12, myMaterialExpressionVectorNoise(0.3 * pos, 1, 2, 0, 300, Hash).r));
 
     float3 pos2 = pos;
-    pos2 += 0.07 * myMaterialExpressionVectorNoise(pos2 * 0.005, 1, 2, 0, 300, Hash).g;
+    pos2 += 0.07 * myMaterialExpressionVectorNoise(pos2 * 0.05, 1, 2, 0, 300, Hash).g;
     pos2.z += 0.5 * brickStep.z * floor(0.5 * pos2.y / brickStep.y);
     float3 nb = floor(pos2 / brickStep * float3(0.5, 0.5, 1.));
     float nbBrick = nb.x + nb.y * 90.;
@@ -128,6 +136,9 @@ float3 brick3( float3 pos, int Hash) {
     brickCol = lerp(brickCol, brickCol3, pow(smoothstep(0.1, 1.05, 1.2 * myMaterialExpressionVectorNoise(pos2 * 0.18, 1, 2, 0, 300, Hash).x * myMaterialExpressionVectorNoise(pos2 * 0.23, 1, 2, 0, 300, Hash).x), 1.5));
     brickCol *= 0.4 + 0.6 * smoothstep(0.80, 0.60, myMaterialExpressionVectorNoise(pos * 0.07, 1, 2, 0, 300, Hash).b);
 
+    return brickCol;
+
+    /*
     pos2 = pos;
     pos2 += 0.07 * myMaterialExpressionVectorNoise(pos2 * 0.005, 1, 2, 0, 300, Hash).g;
     pos2.z += 0.5 * (brickStep.z + 0.02) * mod(floor(0.5 * pos2.y / brickStep.y), 2.);
@@ -137,9 +148,8 @@ float3 brick3( float3 pos, int Hash) {
     float btd = 1. + 0.3 * (hash(nbBrick) - 0.5);
     
     pos2 = mod(pos2, brickStep * float3(2., 2., 1.));
-    float bricks = udRoundBox(pos2 - float3(brickSize.x * 0.5 * btd, brickStep.y, 0.), brickSize, brickBR);
+    float bricks = udRoundBox(pos2 - float3(brickSize.x * 0.5 * btd, brickStep.y, brickStep.z), brickSize, brickBR);
     
     bricks += 0.01 * smoothstep(0.1, 0.95, myMaterialExpressionVectorNoise( pos * 0.18, 1, 2, 0, 300, Hash).r + 0.6 * myMaterialExpressionVectorNoise(0.2 * pos, 1, 2, 0, 300, Hash).r) * smoothstep(-0.2, -0.23, pos.x - brickSize.x * 0.5 * btd);
-
-    return wallColor + bricks * brickCol;
+    */
 }
