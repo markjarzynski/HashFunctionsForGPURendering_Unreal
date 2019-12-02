@@ -1,90 +1,92 @@
 #pragma once
 
-float test_bbs( float2 p ) {
-    uint2 v = uint2(p * UINT16_MAX);
-    uint s = seed(v);
+float3 test_bbs( float2 p ) {
+    uint s = p.x * UINT16_MAX;
 
     for (int i = 0; i < ITERATIONS; i++) {
         s = bbs(s);
     }
 
-    return s / UINT16_MAX;
+    float r = s / UINT16_MAX;
+    return float3(r,r,r);
 }
 
-float test_city( float2 p ) {
-    uint2 v = uint2(p * UINT_MAX);
-    uint s = seed(v);
+float3 test_city( float2 p ) {
+    uint s = p.x * UINT_MAX;
 
     for (int i = 0; i < ITERATIONS; i++) {
         s = city(s);
     }
 
-    return s / UINT_MAX;
+    float r = s / UINT_MAX;
+    return float3(r,r,r);
 }
 
-float test_RandBBSfloat ( float2 p ) {
+float3 test_esgtsa( float2 p ) {
+    uint s = p.x * UINT_MAX;
 
     for (int i = 0; i < ITERATIONS; i++) {
-        p = RandBBSfloat(seed(p)).xx;
+        s = esgtsa(s);
     }
 
-    return p.x;
+    float r = s / UINT_MAX;
+    return float3(r,r,r);
 }
 
-float test_RandFast ( float2 p ) {
+float3 test_fast ( float2 p ) {
     for (int i = 0; i < ITERATIONS; i++) {
         p = RandFast(p).xx;
     }
 
-    return p.x;
+    return float3(p,0.0f);
 }
 
-float test_hashwithoutsine11 (float2 p) {
+float3 test_hashwithoutsine11 (float2 p) {
     float v = p.x;
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine11(v);
     }
-    return v;
+    return float3(v,v,v);
 }
 
-float test_hashwithoutsine12 (float2 p) {
+float3 test_hashwithoutsine12 (float2 p) {
     for (int i = 0; i < ITERATIONS; i++) {
         p = hashwithoutsine12(p).xx;
     }
-    return p.x;
+    return p.xxx;
 }
 
-float test_hashwithoutsine13 (float2 p) {
+float3 test_hashwithoutsine13 (float2 p) {
     float3 v = p.xyx;
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine13(v.x);
     }
-    return v.x;
+    return v.xxx;
 }
 
-float test_hashwithoutsine21 (float2 p) {
+float3 test_hashwithoutsine21 (float2 p) {
     for (int i = 0; i < ITERATIONS; i++) {
         p = hashwithoutsine21(p.x);
     }
-    return p.x;
+    return float3(p, 0.0f);
 }
 
-float test_hashwithoutsine22 (float2 p) {
+float3 test_hashwithoutsine22 (float2 p) {
     for (int i = 0; i < ITERATIONS; i++) {
         p = hashwithoutsine22(p);
     }
-    return p.x;
+    return float3(p, 0.0f);
 }
 
-float test_hashwithoutsine23 (float2 p) {
+float3 test_hashwithoutsine23 (float2 p) {
     float3 v = p.xyx;
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine23(v).xyx;
     }
-    return v.x;
+    return float3(v.xy,0.0f);
 }
 
-float test_hashwithoutsine31 (float2 p) {
+float3 test_hashwithoutsine31 (float2 p) {
     float3 v = p.xyx;
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine31(v.x);
@@ -92,85 +94,86 @@ float test_hashwithoutsine31 (float2 p) {
     return v.x;
 }
 
-float test_hashwithoutsine32 (float2 p) {
+float3 test_hashwithoutsine32 (float2 p) {
     float3 v = p.xyx;
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine32(v.yx);
     }
-    return v.x;
+    return v;
 }
 
-float test_hashwithoutsine33 (float2 p) {
+float3 test_hashwithoutsine33 (float2 p) {
     float3 v = p.xyx;
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine33(v);
     }
-    return v.x;
+    return v;
 }
 
-float test_hashwithoutsine41 (float2 p) {
+float4 test_hashwithoutsine41 (float2 p) {
     float4 v = p.xyyx;
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine41(v.x);
     }
-    return v.x;
+    return v;
 }
 
-float test_hashwithoutsine42 (float2 p) {
+float4 test_hashwithoutsine42 (float2 p) {
     float4 v = p.xyyx;
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine42(v.xy);
     }
-    return v.x;
+    return v;
 }
 
-float test_hashwithoutsine43 (float2 p) {
+float4 test_hashwithoutsine43 (float2 p) {
     float4 v = p.xyyx;
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine43(v.xyz);
     }
-    return v.x;
+    return v;
 }
 
-float test_hashwithoutsine44 (float2 p) {
+float4 test_hashwithoutsine44 (float2 p) {
     float4 v = p.xyyx;
     for (int i = 0; i < ITERATIONS; i++) {
         v = hashwithoutsine44(v);
     }
-    return v.x;
+    return v;
 }
 
-float test_hybridtaus( float2 p ) {
-    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+float3 test_hybridtaus( float2 p ) {
+    uint4 v = uint4(p.xyyx * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = hybridtaus(v).xxxx;
     }
 
-    return v.x / UINT_MAX;
+    float r = v.x / UINT_MAX;
+    return float3(r,r,r);
 }
 
-float test_ign( float2 v ) {
+float3 test_ign( float2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = ign(v).xx;
     }
 
-    return v.x;
+    return v.xxx;
 }
 
-float test_iqint1( float2 p ) {
-    uint2 v = uint2(p * UINT_MAX);
-    uint s = seed(v);
+float3 test_iqint1( float2 p ) {
+    uint s = uint(p.x * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         s = iqint1(s);
     }
 
-    return s / UINT_MAX;
+    float r = s / UINT_MAX;
+    return float3(r,r,r);
 }
 
 float3 test_iqint2( float2 p ) {
-    uint3 v = uint3(p * UINT_MAX, 0u);
+    uint3 v = uint3(p.xyx * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = iqint2(v);
@@ -179,49 +182,52 @@ float3 test_iqint2( float2 p ) {
     return v / UINT_MAX;
 }
 
-float test_iqint3( float2 p ) {
+float3 test_iqint3( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
-        v = iqint3(seed(v)).xx;
+        v = iqint3(v).xx;
     }
 
-    return v.x / UINT_MAX;
+    float r = v.x / UINT_MAX;
+    return float3(r,r,r);
 }
 
-float test_jkiss32( float2 p ) {
+float3 test_jkiss32( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = jkiss32(v).xx;
     }
 
-    return v.y / UINT_MAX;
+    float r = v.x / UINT_MAX;
+    return float3(r,r,r);
 }
 
-float test_lcg( float2 p ) {
-    uint2 v = uint2(p * UINT_MAX);
-    uint s = seed(v);
+float3 test_lcg( float2 p ) {
+    uint s = uint(p.x * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         s = lcg(s);
     }
 
-    return s / UINT_MAX;
+    float r = s / UINT_MAX;
+    return float3(r,r,r);
 }
 
-float test_murmur3( float2 p ) {
+float3 test_murmur3( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = murmur3(v).xx;
     }
 
-    return v.x / UINT_MAX;
+    float r = v.x / UINT_MAX;
+    return float3(r,r,r);
 }
 
 float3 test_pcg3d( float2 p ) {
-    uint3 v = uint3(p * UINT_MAX, 0u);
+    uint3 v = uint3(p.xyx * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = pcg3d(v);
@@ -231,7 +237,7 @@ float3 test_pcg3d( float2 p ) {
 }
 
 float3 test_pcg3d16( float2 p ) {
-    uint3 v = uint3(p * UINT16_MAX, 0u);
+    uint3 v = uint3(p.xyx * UINT16_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = pcg3d16(v);
@@ -240,155 +246,117 @@ float3 test_pcg3d16( float2 p ) {
     return v / UINT16_MAX;
 }
 
-float test_pcg2d( float2 p ) {
+float3 test_pcg2d( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = pcg2d(v);
     }
 
-    return v.y / UINT_MAX;
+    return float3(v.xy / UINT_MAX, 0.0f);
 }
 
-float3 test_pcg4d( float2 p ) {
-    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+float4 test_pcg4d( float2 p ) {
+    uint4 v = uint4(p.xyyx * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = pcg4d(v);
     }
 
-    return v.yzw / UINT_MAX;
+    return v / UINT_MAX;
 }
 
-float test_PseudoRandom( float2 v ) {
+float3 test_pseudo( float2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = PseudoRandom(v).xx;
     }
 
-    return v.y;
+    return v.xxx;
 }
 
-float3 test_Rand3DPCG16( float2 p ) {
-    uint3 v = uint3(p * UINT16_MAX, 0u);
-
-    for (int i = 0; i < ITERATIONS; i++) {
-        v = Rand3DPCG16(v);
-    }
-
-    return v / UINT16_MAX;
-}
-
-float3 test_Rand3DPCG32( float2 p ) {
-    uint3 v = uint3(p * UINT_MAX, 0u);
-
-    for (int i = 0; i < ITERATIONS; i++) {
-        v = Rand3DPCG32(v);
-    }
-
-    return v / UINT_MAX;
-}
-
-float3 test_Rand4DPCG32( float2 p ) {
-    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
-
-    for (int i = 0; i < ITERATIONS; i++) {
-        v = Rand4DPCG32(v);
-    }
-
-    return v.yzw / UINT_MAX;
-}
-
-float test_ranlim32( float2 p ) {
-    uint2 v = uint2(p * UINT_MAX);
-    uint s = seed(v);
+float3 test_ranlim32( float2 p ) {
+    uint s = uint(p.x * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         s = ranlim32(s);
     }
 
-    return s / UINT_MAX;
+    float r = s / UINT_MAX;
+    return float3(r,r,r);
 }
 
-float test_esgtsa( float2 p ) {
-    uint2 v = uint2(p * UINT_MAX);
-    uint s = seed(v);
 
-    for (int i = 0; i < ITERATIONS; i++) {
-        s = esgtsa(s);
-    }
 
-    return s / UINT_MAX;
-}
-
-float test_superfast( float2 p ) {
-    uint2 v = uint2(p * UINT_MAX);
-    uint s = seed(v);
+float3 test_superfast( float2 p ) {
+    uint s = uint(p.x * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         s = superfast(s);
     }
 
-    return s / UINT_MAX;
+    float r = s / UINT_MAX;
+    return float3(r,r,r);
 }
 
-float test_tea( uint t, float2 p ) {
+float3 test_tea( uint t, float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = tea(t,v);
     }
 
-    return v.y / UINT_MAX;
+    return float3(v / UINT_MAX, 0.0f);
 }
 
-float test_trig( float2 v ) {
+float3 test_trig( float2 v ) {
     for (int i = 0; i < ITERATIONS; i++) {
         v = trig(v).xx;
     }
 
-    return v.y;
+    return v.xxx;
 }
 
-float test_wang( float2 p ) {
-    uint2 v = uint2(p * UINT_MAX);
-    uint s = seed(v);
+float3 test_wang( float2 p ) {
+    uint s = uint(p.x * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         s = wang(s);
     }
 
-    return s / UINT_MAX;
+    float r = s / UINT_MAX;
+    return float3(r,r,r);
 }
 
-float test_xorshift128( float2 p ) {
-    uint4 v = uint4(p * UINT_MAX, p * UINT_MAX);
+float3 test_xorshift128( float2 p ) {
+    uint4 v = uint4(p.xyyx * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = xorshift128(v).xxxx;
     }
 
-    return v.x / UINT_MAX;
+    return v.xxx / UINT_MAX;
 }
 
-float test_xorshift32( float2 p ) {
-    uint2 v = uint2(p * UINT_MAX);
-    uint s = seed(v);
+float3 test_xorshift32( float2 p ) {
+    uint s = uint(p.x * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         s = xorshift32(s);
     }
 
-    return s / UINT_MAX;
+    float r = s / UINT_MAX;
+    return float3(r,r,r);
 }
 
-float test_xxhash32_11( float2 p ) {
+float3 test_xxhash32_11( float2 p ) {
     uint v = uint(p.x * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
         v = xxhash32(v);
     }
 
-    return v / UINT_MAX;
+    float r = v.x / UINT_MAX;
+    return float3(r,r,r);
 }
 
 float test_xxhash32_12( float2 p ) {
@@ -398,7 +366,7 @@ float test_xxhash32_12( float2 p ) {
         v = xxhash32(v).xx;
     }
 
-    return v.x / UINT_MAX;
+    return v.xxx / UINT_MAX;
 }
 
 float test_xxhash32_13( float2 p ) {
@@ -408,7 +376,7 @@ float test_xxhash32_13( float2 p ) {
         v = xxhash32(v).xxx;
     }
 
-    return v.x / UINT_MAX;
+    return v.xxx / UINT_MAX;
 }
 
 
@@ -1341,4 +1309,98 @@ float3 test_lcg_xor4( float2 p ) {
     }
 
     return uint3(v.xyz ^ v.w) / UINT_MAX;
+}
+
+
+// Linear
+
+float test_bbs_linear2( float2 p ) {
+    uint2 v = uint2(p * UINT16_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = bbs(seed(v)).xx;
+    }
+
+    return v.x / UINT16_MAX;
+}
+
+float test_city_linear2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = city(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_esgtsa_linear2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = esgtsa(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_iqint1_linear2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = iqint1(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_lcg_linear2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        //v = lcg(lcg(v.x) + v.y).xx;
+        v = lcg(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_ranlim32_linear2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = ranlim32(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_superfast_linear2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = superfast(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_wang_linear2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = wang(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
+}
+
+float test_xorshift32_linear2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xorshift32(seed(v)).xx;
+    }
+
+    return v.x / UINT_MAX;
 }
