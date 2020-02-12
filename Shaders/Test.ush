@@ -1308,3 +1308,14 @@ float3 test_lcg_xor4( float2 p ) {
 
     return uint3(v.xyz ^ v.w) / UINT_MAX;
 }
+
+float3 test_pcg( float2 p ) {
+    uint s = p.x * UINT_MAX;
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        s = pcg(s);
+    }
+
+    float r = s / UINT_MAX;
+    return float3(r,r,r);
+}

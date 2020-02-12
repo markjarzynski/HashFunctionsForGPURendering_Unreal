@@ -53,10 +53,17 @@ lcg_nested2
 lcg_nested3
 lcg_nested4
 murmur3
+pcg
 pcg2d
 pcg3d
 pcg3d16
 pcg4d
+pcg_linear2
+pcg_linear3
+pcg_linear4
+pcg_nested2
+pcg_nested3
+pcg_nested4
 pseudo
 ranlim32
 ranlim32_linear2
