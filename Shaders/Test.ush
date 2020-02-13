@@ -578,7 +578,8 @@ float test_tea_y( uint t, float2 p ) {
 
 // Linaer2
 
-float3 test_bbs_linear2( float2 p ) {
+/*
+float3 test_bbs_nested2( float2 p ) {
     uint2 v = uint2(p * UINT16_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
@@ -587,6 +588,7 @@ float3 test_bbs_linear2( float2 p ) {
 
     return v.xxx / UINT16_MAX;
 }
+*/
 
 float3 test_city_linear2( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
@@ -1318,4 +1320,64 @@ float3 test_pcg( float2 p ) {
 
     float r = s / UINT_MAX;
     return float3(r,r,r);
+}
+
+float3 test_pcg_linear2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg(seed(v)).xx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_pcg_linear3( float2 p ) {
+    uint3 v = uint3(p.xyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg(seed(v)).xxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_pcg_linear4( float2 p ) {
+    uint4 v = uint4(p.xyyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg(seed(v)).xxxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_pcg_nested2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg(pcg(v.x) + v.y).xx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_pcg_nested3( float2 p ) {
+    uint3 v = uint3(p.xyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg(pcg(pcg(v.x) + v.y) + v.z).xxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_pcg_nested4( float2 p ) {
+    uint4 v = uint4(p.xyyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = pcg(pcg(pcg(pcg(v.x) + v.y) + v.z) + v.w).xxxx;
+    }
+
+    return v.xxx / UINT_MAX;
 }
