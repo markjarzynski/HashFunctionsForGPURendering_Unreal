@@ -34,6 +34,13 @@ uint mur(uint a, uint h) {
     return h * 5u + 0xe6546b64u;
 }
 
+uint bswap32(uint x) {
+    return (((x & 0x000000ffu) << 24) |
+            ((x & 0x0000ff00u) <<  8) |
+            ((x & 0x00ff0000u) >>  8) |
+            ((x & 0xff000000u) >> 24));
+}
+
 uint taus(uint z, int s1, int s2, int s3, uint m)
 {
 	uint b = (((z << s1) ^ z) >> s2);
@@ -83,6 +90,52 @@ uint city(uint s)
 
     return fmix(mur(b, mur(len, c)));
 }
+
+// CityHash32, adapted from Hash32Len5to12 in https://github.com/google/cityhash
+uint city(uint2 s)
+{
+	uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
+    uint len = 8u;
+    uint a = len, b = len * 5, c = 9, d = b;
+
+    a += bswap32(s.x);
+    b += bswap32(s.y);
+    c += bswap32(s.y);
+
+    return fmix(mur(c, mur(b, mur(a, d))));
+}
+
+// CityHash32, adapted from Hash32Len5to12 in https://github.com/google/cityhash
+uint city(uint3 s)
+{
+	uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
+    uint len = 12u;
+    uint a = len, b = len * 5, c = 9, d = b;
+
+    a += bswap32(s.x);
+    b += bswap32(s.z);
+    c += bswap32(s.y);
+
+    return fmix(mur(c, mur(b, mur(a, d))));
+}
+
+// CityHash32, adapted from Hash32Len12to24 in https://github.com/google/cityhash
+uint city(uint4 s)
+{
+	uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
+    uint len = 16u;
+    uint a = bswap32(s.w);
+    uint b = bswap32(s.y);
+    uint c = bswap32(s.z);
+    uint d = bswap32(s.z);
+    uint e = bswap32(s.x);
+    uint f = bswap32(s.w);
+    uint h = len;
+
+    return fmix(mur(f, mur(e, mur(d, mur(c, mur(b, mur(a, h)))))));
+}
+
+
 
 // Interleaved Gradient Noise
 //  - Jimenez, Next Generation Post Processing in Call of Duty: Advanced Warfare
@@ -174,6 +227,94 @@ uint murmur3(uint2 seed)
     return h;
 }
 
+uint murmur3(uint3 seed)
+{
+	uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
+    uint h = seed.x;
+    uint k = seed.y;
+
+    k *= c1;
+    k = uint(rotl(k,15u));
+    k *= c2;
+
+    h ^= k;
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    k = seed.z;
+
+    k *= c1;
+    k = uint(rotl(k,15u));
+    k *= c2;
+
+    h ^= k;
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    h ^= k;
+
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    h ^= h >> 16u;
+    h *= 0x85ebca6bu;
+    h ^= h >> 13u;
+    h *= 0xc2b2ae35u;
+    h ^= h >> 16u;
+
+    return h;
+}
+
+uint murmur3(uint4 seed)
+{
+	uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
+    uint h = seed.x;
+    uint k = seed.y;
+
+    k *= c1;
+    k = uint(rotl(k,15u));
+    k *= c2;
+
+    h ^= k;
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    k = seed.z;
+
+    k *= c1;
+    k = uint(rotl(k,15u));
+    k *= c2;
+
+    h ^= k;
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    k = seed.w;
+
+    k *= c1;
+    k = uint(rotl(k,15u));
+    k *= c2;
+
+    h ^= k;
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    h ^= k;
+
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    h ^= h >> 16u;
+    h *= 0x85ebca6bu;
+    h ^= h >> 13u;
+    h *= 0xc2b2ae35u;
+    h ^= h >> 16u;
+
+    return h;
+}
+
+
+
 // 9 imad (+ 6 iops with final shuffle)
 uint3 pcg3d(uint3 v) {
 
@@ -253,6 +394,96 @@ uint superfast(uint data)
 
     hash += data & 0xffffu;
     tmp = (((data >> 16) & 0xffffu) << 11) ^ hash;
+    hash = (hash << 16) ^ tmp;
+    hash += hash >> 11;
+
+    /* Force "avalanching" of final 127 bits */
+    hash ^= hash << 3;
+    hash += hash >> 5;
+    hash ^= hash << 4;
+    hash += hash >> 17;
+    hash ^= hash << 25;
+    hash += hash >> 6;
+
+    return hash;
+}
+
+uint superfast(uint2 data)
+{
+    uint hash = 8u, tmp;
+
+    hash += data.x & 0xffffu;
+    tmp = (((data.x >> 16) & 0xffffu) << 11) ^ hash;
+    hash = (hash << 16) ^ tmp;
+    hash += hash >> 11;
+
+    hash += data.y & 0xffffu;
+    tmp = (((data.y >> 16) & 0xffffu) << 11) ^ hash;
+    hash = (hash << 16) ^ tmp;
+    hash += hash >> 11;
+
+    /* Force "avalanching" of final 127 bits */
+    hash ^= hash << 3;
+    hash += hash >> 5;
+    hash ^= hash << 4;
+    hash += hash >> 17;
+    hash ^= hash << 25;
+    hash += hash >> 6;
+
+    return hash;
+}
+
+uint superfast(uint3 data)
+{
+    uint hash = 8u, tmp;
+
+    hash += data.x & 0xffffu;
+    tmp = (((data.x >> 16) & 0xffffu) << 11) ^ hash;
+    hash = (hash << 16) ^ tmp;
+    hash += hash >> 11;
+
+    hash += data.y & 0xffffu;
+    tmp = (((data.y >> 16) & 0xffffu) << 11) ^ hash;
+    hash = (hash << 16) ^ tmp;
+    hash += hash >> 11;
+
+    hash += data.z & 0xffffu;
+    tmp = (((data.z >> 16) & 0xffffu) << 11) ^ hash;
+    hash = (hash << 16) ^ tmp;
+    hash += hash >> 11;
+
+    /* Force "avalanching" of final 127 bits */
+    hash ^= hash << 3;
+    hash += hash >> 5;
+    hash ^= hash << 4;
+    hash += hash >> 17;
+    hash ^= hash << 25;
+    hash += hash >> 6;
+
+    return hash;
+}
+
+uint superfast(uint4 data)
+{
+    uint hash = 8u, tmp;
+
+    hash += data.x & 0xffffu;
+    tmp = (((data.x >> 16) & 0xffffu) << 11) ^ hash;
+    hash = (hash << 16) ^ tmp;
+    hash += hash >> 11;
+
+    hash += data.y & 0xffffu;
+    tmp = (((data.y >> 16) & 0xffffu) << 11) ^ hash;
+    hash = (hash << 16) ^ tmp;
+    hash += hash >> 11;
+
+    hash += data.z & 0xffffu;
+    tmp = (((data.z >> 16) & 0xffffu) << 11) ^ hash;
+    hash = (hash << 16) ^ tmp;
+    hash += hash >> 11;
+
+    hash += data.w & 0xffffu;
+    tmp = (((data.w >> 16) & 0xffffu) << 11) ^ hash;
     hash = (hash << 16) ^ tmp;
     hash += hash >> 11;
 
