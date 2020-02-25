@@ -1,21 +1,3 @@
-LogTemp: Repeating last play command: New Editor Window (PIE)
-LogBlueprintUserMessages: Early PlayInEditor Detection: Level '/Game/Maps/TimingMap.TimingMap:PersistentLevel' has LevelScriptBlueprint '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap' with GeneratedClass '/Game/Maps/TimingMap.TimingMap_C' with ClassGeneratedBy '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap'
-LogPlayLevel: PlayLevel: No blueprints needed recompiling
-PIE: New page: PIE session: TimingMap (Feb 24, 2020, 4:37:23 PM)
-LogPlayLevel: Creating play world package: /Game/Maps/UEDPIE_0_TimingMap
-LogPlayLevel: PIE: StaticDuplicateObject took: (0.001602s)
-LogAIModule: Creating AISystem for world TimingMap
-LogPlayLevel: PIE: World Init took: (0.000502s)
-LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/Maps/TimingMap.TimingMap to /Game/Maps/UEDPIE_0_TimingMap.TimingMap (0.002207s)
-LogInit: XAudio2 using 'Speakers (Realtek(R) Audio)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
-LogInit: FAudioDevice initialized.
-LogLoad: Game class is 'GameModeBase'
-LogWorld: Bringing World /Game/Maps/UEDPIE_0_TimingMap.TimingMap up for play (max tick rate 0) at 2020.02.24-21.37.24
-LogWorld: Bringing up level for play took: 0.001397
-Cmd: r.profilegpu.root Translucency
-r.ProfileGPU.Root = "Translucency"
-Cmd: r.profilegpu.showui 0
-r.ProfileGPU.ShowUI = "0"
 LogBlueprintUserMessages: [TimingMap_C_5] bbs
 PIE: Play in editor start time for /Game/Maps/UEDPIE_0_TimingMap -0.079
 LogBlueprintUserMessages: Late PlayInEditor Detection: Level '/Game/Maps/TimingMap.TimingMap:PersistentLevel' has LevelScriptBlueprint '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap' with GeneratedClass '/Game/Maps/TimingMap.TimingMap_C' with ClassGeneratedBy '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap'
@@ -1062,6 +1044,3 @@ LogRHI:    97.9%65.15ms   Translucency 2 draws 48 prims 54 verts
 LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
 LogRHI:       97.9%65.15ms   Other Children
 LogRHI: Total Nodes 98 Draws 188
-LogBlueprintUserMessages: Early EndPlayMap Detection: Level '/Game/Maps/TimingMap.TimingMap:PersistentLevel' has LevelScriptBlueprint '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap' with GeneratedClass '/Game/Maps/TimingMap.TimingMap_C' with ClassGeneratedBy '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap'
-LogSlate: Window 'HashFunction Game Preview Standalone (64-bit/PCD3D_SM5)' being destroyed
-LogBlueprintUserMessages: Late EndPlayMap Detection: Level '/Game/Maps/TimingMap.TimingMap:PersistentLevel' has LevelScriptBlueprint '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap' with GeneratedClass '/Game/Maps/TimingMap.TimingMap_C' with ClassGeneratedBy '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap'
