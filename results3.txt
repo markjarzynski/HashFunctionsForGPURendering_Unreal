@@ -1,0 +1,1067 @@
+LogTemp: Repeating last play command: New Editor Window (PIE)
+LogBlueprintUserMessages: Early PlayInEditor Detection: Level '/Game/Maps/TimingMap.TimingMap:PersistentLevel' has LevelScriptBlueprint '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap' with GeneratedClass '/Game/Maps/TimingMap.TimingMap_C' with ClassGeneratedBy '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap'
+LogPlayLevel: PlayLevel: No blueprints needed recompiling
+PIE: New page: PIE session: TimingMap (Feb 24, 2020, 4:37:23 PM)
+LogPlayLevel: Creating play world package: /Game/Maps/UEDPIE_0_TimingMap
+LogPlayLevel: PIE: StaticDuplicateObject took: (0.001602s)
+LogAIModule: Creating AISystem for world TimingMap
+LogPlayLevel: PIE: World Init took: (0.000502s)
+LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/Maps/TimingMap.TimingMap to /Game/Maps/UEDPIE_0_TimingMap.TimingMap (0.002207s)
+LogInit: XAudio2 using 'Speakers (Realtek(R) Audio)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+LogInit: FAudioDevice initialized.
+LogLoad: Game class is 'GameModeBase'
+LogWorld: Bringing World /Game/Maps/UEDPIE_0_TimingMap.TimingMap up for play (max tick rate 0) at 2020.02.24-21.37.24
+LogWorld: Bringing up level for play took: 0.001397
+Cmd: r.profilegpu.root Translucency
+r.ProfileGPU.Root = "Translucency"
+Cmd: r.profilegpu.showui 0
+r.ProfileGPU.ShowUI = "0"
+LogBlueprintUserMessages: [TimingMap_C_5] bbs
+PIE: Play in editor start time for /Game/Maps/UEDPIE_0_TimingMap -0.079
+LogBlueprintUserMessages: Late PlayInEditor Detection: Level '/Game/Maps/TimingMap.TimingMap:PersistentLevel' has LevelScriptBlueprint '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap' with GeneratedClass '/Game/Maps/TimingMap.TimingMap_C' with ClassGeneratedBy '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap'
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 83.64ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.0%81.96ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.0%81.96ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] bbs_linear2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 89.82ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.4%88.38ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.4%88.38ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] bbs_linear3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 94.63ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.5%93.23ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.5%93.23ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] bbs_linear4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 96.28ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.6%94.89ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.5%94.89ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] bbs_nested
+Cmd: profilegpu
+Profiling the next GPU frame
+LogBlueprintUserMessages: [TimingMap_C_5] bbs_nested3
+LogRHI: Perf marker hierarchy, total GPU time 160.66ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    99.1%159.21ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       99.1%159.21ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 242.04ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    99.4%240.65ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       99.4%240.65ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] bbs_nested4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogBlueprintUserMessages: [TimingMap_C_5] city
+LogRHI: Perf marker hierarchy, total GPU time 323.51ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    99.6%322.13ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       99.6%322.12ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 100.78ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.4%99.19ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.4%99.19ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] city_linear2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 116.77ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.8%115.37ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.8%115.37ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] city_linear3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 121.02ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.8%119.57ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.8%119.57ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] city_linear4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 121.65ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.9%120.26ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.9%120.25ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] city_nested2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogBlueprintUserMessages: [TimingMap_C_5] city_nested3
+LogRHI: Perf marker hierarchy, total GPU time 206.57ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    99.3%205.19ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       99.3%205.19ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 324.03ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    99.6%322.65ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       99.6%322.65ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] city_nested4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogBlueprintUserMessages: [TimingMap_C_5] esgtsa
+LogRHI: Perf marker hierarchy, total GPU time 427.38ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    99.7%425.99ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       99.7%425.99ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+Cmd: profilegpu
+Profiling the next GPU frame
+LogBlueprintUserMessages: [TimingMap_C_5] esgtsa_linear2
+LogRHI: Perf marker hierarchy, total GPU time 147.01ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    20.7%30.50ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       20.7%30.50ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 33.66ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    95.9%32.27ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       95.8%32.26ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] esgtsa_linear3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 33.74ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    95.8%32.31ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       95.8%32.31ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] esgtsa_linear4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 33.76ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    95.9%32.39ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       95.9%32.38ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] esgtsa_nested2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 64.48ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.9%63.11ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.9%63.11ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] esgtsa_nested3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 95.35ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.5%93.95ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.5%93.95ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] esgtsa_nested4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 127.38ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.9%126.01ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.9%126.00ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] fast
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 36.88ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    96.6%35.62ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       96.6%35.62ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine11
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 23.63ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    94.4%22.32ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       94.4%22.32ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine12
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 30.60ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    95.4%29.18ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       95.4%29.18ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine13
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 29.84ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    95.6%28.54ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       95.6%28.54ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine21
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 44.73ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.1%43.42ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.1%43.42ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine22
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 51.24ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.4%49.88ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.3%49.88ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine23
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 51.21ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.4%49.91ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.4%49.91ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine31
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 44.19ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.0%42.89ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.0%42.88ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine32
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 51.50ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.5%50.24ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.5%50.24ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine33
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 55.35ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.6%54.00ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.6%54.00ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine41
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 53.56ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.5%52.22ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.5%52.22ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine42
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 60.26ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.5%58.78ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.5%58.78ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine43
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 67.70ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.9%66.31ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.9%66.30ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hashwithoutsine44
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 74.53ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.1%73.13ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.1%73.13ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] hybridtaus
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 49.75ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.2%48.35ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.2%48.34ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] ign
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 19.00ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    92.7%17.61ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       92.7%17.61ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] iqint1
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 22.90ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    94.1%21.55ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       94.1%21.55ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] iqint1_linear2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 33.68ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    96.0%32.33ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       96.0%32.33ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] iqint1_linear3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 39.11ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    96.4%37.71ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       96.4%37.70ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] iqint1_linear4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 38.60ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    96.4%37.21ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       96.4%37.20ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] iqint1_nested
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 47.35ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.1%45.99ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.1%45.99ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] iqint1_nested3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 70.65ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.1%69.32ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.1%69.32ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] iqint1_nested4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 96.86ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.6%95.48ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.6%95.48ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] iqint2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 101.97ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.6%100.57ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.6%100.57ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] iqint3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 24.13ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    94.2%22.73ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       94.2%22.73ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] jkiss32
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 22.61ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    94.0%21.25ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       94.0%21.25ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] lcg
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 7.65ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    82.2% 6.29ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       82.2% 6.29ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] lcg_linear2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 10.83ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    88.0% 9.52ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       87.9% 9.52ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] lcg_linear3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 21.58ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    93.4%20.16ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       93.4%20.16ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] lcg_linear4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 12.68ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    89.8%11.39ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       89.8%11.39ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] lcg_nested2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 14.44ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    90.1%13.01ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       90.1%13.01ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] lcg_nested3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 20.27ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    93.1%18.87ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       93.1%18.86ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] lcg_nested4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 27.55ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    94.8%26.13ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       94.8%26.12ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] murmur3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 59.74ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.6%58.31ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.6%58.31ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] pcg
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 26.39ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    94.8%25.02ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       94.8%25.02ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] pcg2d
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 58.65ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.6%57.24ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.6%57.24ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] pcg3d
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 75.53ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.1%74.08ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.1%74.08ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] pcg3d16
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 55.74ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.4%54.29ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.4%54.29ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] pcg4d
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 99.67ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.6%98.23ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.6%98.23ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] pcg_linear2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 1.61ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:     0.1% 0.00ms   Translucency 1 draws 0 prims 0 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] pcg_linear3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 1.60ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:     0.1% 0.00ms   Translucency 1 draws 0 prims 0 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI: Total Nodes 98 Draws 190
+LogBlueprintUserMessages: [TimingMap_C_5] pcg_linear4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 1.55ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.1% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:     0.1% 0.00ms   Translucency 1 draws 0 prims 0 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] pcg_nested2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 1.62ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.1% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:     0.1% 0.00ms   Translucency 1 draws 0 prims 0 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] pcg_nested3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 1.53ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.1% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:     0.1% 0.00ms   Translucency 1 draws 0 prims 0 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI: Total Nodes 98 Draws 190
+LogBlueprintUserMessages: [TimingMap_C_5] pcg_nested4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 1.57ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.1% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:     0.1% 0.00ms   Translucency 1 draws 0 prims 0 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI: Total Nodes 98 Draws 190
+LogBlueprintUserMessages: [TimingMap_C_5] pseudo
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 30.21ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    95.5%28.84ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       95.5%28.84ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] ranlim32
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 48.67ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.2%47.33ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.2%47.33ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] ranlim32_linear2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 61.86ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.7%60.47ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.7%60.47ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] ranlim32_linear3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 67.11ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.9%65.70ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.9%65.70ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] ranlim32_linear4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 68.66ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.9%67.22ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.9%67.21ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] ranlim32_nested2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 105.11ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.7%103.70ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.7%103.70ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] ranlim32_nested3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogBlueprintUserMessages: [TimingMap_C_5] ranlim32_nested4
+LogRHI: Perf marker hierarchy, total GPU time 158.22ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    99.1%156.86ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       99.1%156.86ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 210.71ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    99.3%209.26ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       99.3%209.26ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] superfast
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 47.66ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.2%46.33ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.2%46.33ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] superfast_linear2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 55.33ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.5%53.97ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.5%53.96ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] superfast_linear3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 58.45ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.7%57.10ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.7%57.10ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] superfast_linear4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 58.52ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.7%57.19ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.7%57.19ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] superfast_nested2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 95.80ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.6%94.45ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.6%94.45ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] superfast_nested3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 145.59ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    99.1%144.25ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       99.1%144.25ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] superfast_nested4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogBlueprintUserMessages: [TimingMap_C_5] tea2
+LogRHI: Perf marker hierarchy, total GPU time 196.11ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    99.3%194.76ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       99.3%194.76ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 52.05ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.1%50.55ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.1%50.55ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] tea3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 69.46ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.0%68.08ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.0%68.08ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] tea4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 92.11ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.5%90.75ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.5%90.74ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] tea5
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 114.96ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.8%113.55ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.8%113.55ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] tea6
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 143.36ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    99.0%141.98ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       99.0%141.97ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] trig
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 19.22ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    92.8%17.83ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       92.8%17.83ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] wang
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 26.64ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    94.8%25.25ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       94.8%25.25ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] wang_linear2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 38.79ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    96.4%37.39ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       96.4%37.39ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] wang_linear3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 42.88ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    96.7%41.48ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       96.7%41.48ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] wang_linear4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 42.62ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    96.7%41.22ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       96.7%41.21ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] wang_nested2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 56.39ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.5%54.99ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.5%54.99ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] wang_nested3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 83.69ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.3%82.26ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.3%82.26ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] wang_nested4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 113.84ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.8%112.48ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.8%112.48ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] xorshift128
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 16.46ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    91.7%15.09ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       91.7%15.08ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] xorshift32
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 17.16ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    92.0%15.79ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       92.0%15.79ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] xorshift32_linear2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 27.77ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    95.0%26.39ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       95.0%26.39ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] xorshift32_linear3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 32.58ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    95.8%31.21ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       95.8%31.20ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] xorshift32_linear4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 33.58ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    96.0%32.22ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       96.0%32.22ms   Other Children
+LogRHI: Total Nodes 98 Draws 189
+LogBlueprintUserMessages: [TimingMap_C_5] xorshift32_nested2
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 35.33ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    96.1%33.94ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       96.1%33.94ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] xorshift32_nested3
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 54.05ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.5%52.70ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.5%52.70ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] xorshift32_nested4
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 71.37ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    98.1%69.98ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       98.1%69.98ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] xxhash32_11
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 42.24ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    96.8%40.87ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       96.8%40.87ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] xxhash32_12
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 50.10ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.2%48.67ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.1%48.67ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: [TimingMap_C_5] xxhash32_13
+Cmd: profilegpu
+Profiling the next GPU frame
+LogRHI: Perf marker hierarchy, total GPU time 66.51ms
+LogRHI: Warning: Profiled range was continuous.
+LogRHI:     0.0% 0.00ms   Translucency 1 draws 8 prims 10 verts
+LogRHI:    97.9%65.15ms   Translucency 2 draws 48 prims 54 verts
+LogRHI:        0.0% 0.00ms   BeginSeparateTranslucency 1 draws 0 prims 0 verts
+LogRHI:       97.9%65.15ms   Other Children
+LogRHI: Total Nodes 98 Draws 188
+LogBlueprintUserMessages: Early EndPlayMap Detection: Level '/Game/Maps/TimingMap.TimingMap:PersistentLevel' has LevelScriptBlueprint '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap' with GeneratedClass '/Game/Maps/TimingMap.TimingMap_C' with ClassGeneratedBy '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap'
+LogSlate: Window 'HashFunction Game Preview Standalone (64-bit/PCD3D_SM5)' being destroyed
+LogBlueprintUserMessages: Late EndPlayMap Detection: Level '/Game/Maps/TimingMap.TimingMap:PersistentLevel' has LevelScriptBlueprint '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap' with GeneratedClass '/Game/Maps/TimingMap.TimingMap_C' with ClassGeneratedBy '/Game/Maps/TimingMap.TimingMap:PersistentLevel.TimingMap'
