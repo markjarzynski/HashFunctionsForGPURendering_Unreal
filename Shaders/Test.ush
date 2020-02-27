@@ -22,6 +22,38 @@ float3 test_city( float2 p ) {
     return float3(r,r,r);
 }
 
+float3 test_city2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = city(v).xx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_city3( float2 p ) {
+    uint3 v = uint3(p.xyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = city(v).xxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_city4( float2 p ) {
+    uint4 v = uint4(p.xyyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = city(v).xxxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+
+
 float3 test_esgtsa( float2 p ) {
     uint s = p.x * UINT_MAX;
 
@@ -222,9 +254,30 @@ float3 test_murmur3( float2 p ) {
         v = murmur3(v).xx;
     }
 
-    float r = v.x / UINT_MAX;
-    return float3(r,r,r);
+    return v.xxx / UINT_MAX;
 }
+
+
+float3 test_murmur3_3( float2 p ) {
+    uint3 v = uint3(p.xyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = murmur3(v).xxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_murmur3_4( float2 p ) {
+    uint4 v = uint4(p.xyyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = murmur3(v).xxxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
 
 float3 test_pcg3d( float2 p ) {
     uint3 v = uint3(p.xyx * UINT_MAX);
@@ -296,6 +349,36 @@ float3 test_superfast( float2 p ) {
 
     float r = s / UINT_MAX;
     return float3(r,r,r);
+}
+
+float3 test_superfast2( float2 p ) {
+    uint2 s = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        s = superfast(s).xx;
+    }
+
+    return s.xxx / UINT_MAX;
+}
+
+float3 test_superfast3( float2 p ) {
+    uint3 s = uint3(p.xyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        s = superfast(s).xxx;
+    }
+
+    return s.xxx / UINT_MAX;
+}
+
+float3 test_superfast4( float2 p ) {
+    uint4 s = uint4(p.xyyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        s = superfast(s).xxxx;
+    }
+
+    return s.xxx / UINT_MAX;
 }
 
 float3 test_tea( uint t, float2 p ) {
