@@ -248,6 +248,16 @@ float3 test_lcg( float2 p ) {
 }
 
 float3 test_murmur3( float2 p ) {
+    uint v = uint(p.x * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = murmur3(v).x;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_murmur3_2( float2 p ) {
     uint2 v = uint2(p * UINT_MAX);
 
     for (int i = 0; i < ITERATIONS; i++) {
@@ -256,6 +266,7 @@ float3 test_murmur3( float2 p ) {
 
     return v.xxx / UINT_MAX;
 }
+
 
 
 float3 test_murmur3_3( float2 p ) {

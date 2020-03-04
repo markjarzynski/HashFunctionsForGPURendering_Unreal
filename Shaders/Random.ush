@@ -202,39 +202,70 @@ uint lcg(uint p) {
     return p * 1664525u + 1013904223u;
 }
 
-// Adapted from MurmurHas3_x86_32 from https://github.com/aappleby/smhasher
-uint murmur3(uint2 seed)
+// Adapted from MurmurHash3_x86_32 from https://github.com/aappleby/smhasher
+uint murmur3(uint seed)
 {
-    uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
-    uint h = seed.x;
-    uint k = seed.y;
+    uint h = 0u;
+    uint k = seed;
 
     k *= c1;
-    k = uint(rotl(k,15u));
+    k = rotl(k,15u);
     k *= c2;
 
     h ^= k;
-
     h = rotl(h,13u);
     h = h*5u+0xe6546b64u;
 
-    h ^= h >> 16u;
-    h *= 0x85ebca6bu;
-    h ^= h >> 13u;
-    h *= 0xc2b2ae35u;
-    h ^= h >> 16u;
+    h ^= 4u;
 
-    return h;
+    return fmix(h);
+}
+
+uint murmur3(uint2 seed)
+{
+    uint h = 0u;
+    uint k = seed.x;
+
+    k *= c1;
+    k = rotl(k,15u);
+    k *= c2;
+
+    h ^= k;
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    k = seed.y;
+
+    k *= c1;
+    k = rotl(k,15u);
+    k *= c2;
+
+    h ^= k;
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    h ^= 8u;
+
+    return fmix(h);
 }
 
 uint murmur3(uint3 seed)
 {
-	uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
-    uint h = seed.x;
-    uint k = seed.y;
+    uint h = 0u;
+    uint k = seed.x;
 
     k *= c1;
-    k = uint(rotl(k,15u));
+    k = rotl(k,15u);
+    k *= c2;
+
+    h ^= k;
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    k = seed.y;
+
+    k *= c1;
+    k = rotl(k,15u);
     k *= c2;
 
     h ^= k;
@@ -244,35 +275,35 @@ uint murmur3(uint3 seed)
     k = seed.z;
 
     k *= c1;
-    k = uint(rotl(k,15u));
+    k = rotl(k,15u);
     k *= c2;
 
     h ^= k;
     h = rotl(h,13u);
     h = h*5u+0xe6546b64u;
 
-    h ^= k;
+    h ^= 12u;
 
-    h = rotl(h,13u);
-    h = h*5u+0xe6546b64u;
-
-    h ^= h >> 16u;
-    h *= 0x85ebca6bu;
-    h ^= h >> 13u;
-    h *= 0xc2b2ae35u;
-    h ^= h >> 16u;
-
-    return h;
+    return fmix(h);
 }
 
 uint murmur3(uint4 seed)
 {
-	uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
-    uint h = seed.x;
-    uint k = seed.y;
+    uint h = 0u;
+    uint k = seed.x;
 
     k *= c1;
-    k = uint(rotl(k,15u));
+    k = rotl(k,15u);
+    k *= c2;
+
+    h ^= k;
+    h = rotl(h,13u);
+    h = h*5u+0xe6546b64u;
+
+    k = seed.y;
+
+    k *= c1;
+    k = rotl(k,15u);
     k *= c2;
 
     h ^= k;
@@ -282,7 +313,7 @@ uint murmur3(uint4 seed)
     k = seed.z;
 
     k *= c1;
-    k = uint(rotl(k,15u));
+    k = rotl(k,15u);
     k *= c2;
 
     h ^= k;
@@ -292,25 +323,16 @@ uint murmur3(uint4 seed)
     k = seed.w;
 
     k *= c1;
-    k = uint(rotl(k,15u));
+    k = rotl(k,15u);
     k *= c2;
 
     h ^= k;
     h = rotl(h,13u);
     h = h*5u+0xe6546b64u;
 
-    h ^= k;
+    h ^= 16u;
 
-    h = rotl(h,13u);
-    h = h*5u+0xe6546b64u;
-
-    h ^= h >> 16u;
-    h *= 0x85ebca6bu;
-    h ^= h >> 13u;
-    h *= 0xc2b2ae35u;
-    h ^= h >> 16u;
-
-    return h;
+    return fmix(h);
 }
 
 
