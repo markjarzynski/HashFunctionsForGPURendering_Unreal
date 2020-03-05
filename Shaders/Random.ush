@@ -205,6 +205,7 @@ uint lcg(uint p) {
 // Adapted from MurmurHash3_x86_32 from https://github.com/aappleby/smhasher
 uint murmur3(uint seed)
 {
+	uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
     uint h = 0u;
     uint k = seed;
 
@@ -223,6 +224,7 @@ uint murmur3(uint seed)
 
 uint murmur3(uint2 seed)
 {
+	uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
     uint h = 0u;
     uint k = seed.x;
 
@@ -251,6 +253,7 @@ uint murmur3(uint2 seed)
 
 uint murmur3(uint3 seed)
 {
+	uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
     uint h = 0u;
     uint k = seed.x;
 
@@ -289,6 +292,7 @@ uint murmur3(uint3 seed)
 
 uint murmur3(uint4 seed)
 {
+	uint c1 = 0xcc9e2d51u, c2 = 0x1b873593u;
     uint h = 0u;
     uint k = seed.x;
 
