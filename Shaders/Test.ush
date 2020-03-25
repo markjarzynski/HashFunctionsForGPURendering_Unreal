@@ -545,6 +545,17 @@ float3 test_xxhash32_13( float2 p ) {
     return v.xxx / UINT_MAX;
 }
 
+float3 test_xxhash32_14( float2 p ) {
+    uint4 v = uint4(p.xyyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xxhash32(v).xxxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+
 
 
 uint test_hash3mul( uint v ) {
