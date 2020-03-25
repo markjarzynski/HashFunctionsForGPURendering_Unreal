@@ -247,6 +247,16 @@ float3 test_lcg( float2 p ) {
     return float3(r,r,r);
 }
 
+float4 test_md5(float2 p) {
+    uint4 v = uint4(p.xyyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = md5(v);
+    }
+
+    return v / UINT_MAX;
+}
+
 float3 test_murmur3( float2 p ) {
     uint v = uint(p.x * UINT_MAX);
 
