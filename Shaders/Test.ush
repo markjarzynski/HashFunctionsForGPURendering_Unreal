@@ -555,6 +555,67 @@ float3 test_xxhash32_14( float2 p ) {
     return v.xxx / UINT_MAX;
 }
 
+float3 test_xxhash32_linear2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xxhash32(seed(v)).xx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_xxhash32_linear3( float2 p ) {
+    uint3 v = uint3(p.xyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xxhash32(seed(v)).xxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_xxhash32_linear4( float2 p ) {
+    uint4 v = uint4(p.xyyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xxhash32(seed(v)).xxxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_xxhash32_nested2( float2 p ) {
+    uint2 v = uint2(p * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xxhash32(xxhash32(v.x) + v.y).xx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+
+float3 test_xxhash32_nested3( float2 p ) {
+    uint3 v = uint3(p.xyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xxhash32(xxhash32(xxhash32(v.x) + v.y) + v.z).xxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
+float3 test_xxhash32_nested4( float2 p ) {
+    uint4 v = uint4(p.xyyx * UINT_MAX);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        v = xxhash32(xxhash32(xxhash32(xxhash32(v.x) + v.y) + v.z) + v.w).xxxx;
+    }
+
+    return v.xxx / UINT_MAX;
+}
+
 
 
 
