@@ -7,6 +7,224 @@
 
 uint3 Hash_Multiplexer(int Hash, uint3 pos)
 {
+    uint4 p = uint4(pos.xyz, pos.x ^ pos.y ^ pos.z);
+
+    if (Hash == 0) {            // bbs
+        return bbs(p.x);
+    } else if (Hash == 1) {     // bbs_linear2
+        return bbs(seed(p.xy));
+    } else if (Hash == 2) {     // bbs_linear3
+        return bbs(seed(p.xyz));
+    } else if (Hash == 3) {     // bbs_linear4
+        return bbs(seed(p));
+    } else if (Hash == 4) {     // bbs_nested2
+        return bbs(bbs(p.x) + p.y);
+    } else if (Hash == 5) {     // bbs_nested3
+        return bbs(bbs(bbs(p.x) + p.y) + p.z);
+    } else if (Hash == 6) {     // bbs_nested4
+        return bbs(bbs(bbs(bbs(p.x) + p.y) + p.z) + p.w);
+    } else if (Hash == 7) {     // city
+        return city(p.x);
+    } else if (Hash == 8) {     // city_linear2
+        return city(seed(p.xy));
+    } else if (Hash == 9) {     // city_linear3
+        return city(seed(p.xyz));
+    } else if (Hash == 10) {     // city_linear4
+        return city(seed(p));
+    } else if (Hash == 11) {     // city_multibyte2
+        return city(p.xy);
+    } else if (Hash == 12) {     // city_multibyte3
+        return city(p.xyz);
+    } else if (Hash == 13) {     // city_multibyte4
+        return city(p);
+    } else if (Hash == 14) {     // city_nested2
+        return city(city(p.x) + p.y);
+    } else if (Hash == 15) {     // city_nested3
+        return city(city(city(p.x) + p.y) + p.z);
+    } else if (Hash == 16) {     // city_nested4
+        return city(city(city(city(p.x) + p.y) + p.z) + p.w);
+    } else if (Hash == 17) {     // esgtsa
+        return esgtsa(p.x);
+    } else if (Hash == 18) {     // esgtsa_linear2
+        return esgtsa(seed(p.xy));
+    } else if (Hash == 19) {     // esgtsa_linear3
+        return esgtsa(seed(p.xyz));
+    } else if (Hash == 20) {     // esgtsa_linear4
+        return esgtsa(seed(p));
+    } else if (Hash == 21) {     // esgtsa_nested2
+        return esgtsa(esgtsa(p.x) + p.y);
+    } else if (Hash == 22) {     // esgtsa_nested3
+        return esgtsa(esgtsa(esgtsa(p.x) + p.y) + p.z);
+    } else if (Hash == 23) {     // esgtsa_nested4
+        return esgtsa(esgtsa(esgtsa(esgtsa(p.x) + p.y) + p.z) + p.w);
+    } else if (Hash == 24) {     // fast
+        return RandFast(p.xy);
+    } else if (Hash == 25) {     // hashwithoutsine11
+        return hashwithoutsine11(p.x);
+    } else if (Hash == 26) {     // hashwithoutsine12
+        return uint3(hashwithoutsine12(p.x).xy, 0u);
+    } else if (Hash == 27) {     // hashwithoutsine13
+        return hashwithoutsine13(p.x);
+    } else if (Hash == 28) {     // hashwithoutsine21
+        return hashwithoutsine21(p.xy);
+    } else if (Hash == 29) {     // hashwithoutsine22
+        return uint3(hashwithoutsine(p.xy), 0u);
+    } else if (Hash == 30) {     // hashwithoutsine23
+        return hashwithoutsine23(p.xyz);
+    } else if (Hash == 31) {     // hashwithoutsine31
+        return hashwithoutsine31(p.xyz);
+    } else if (Hash == 32) {     // hashwithoutsine32
+        return uint3(hashwithoutsine32(p.xyz),0);
+    } else if (Hash == 33) {     // hashwithoutsine33
+        return hashwithoutsine33(p.xyz);
+    } else if (Hash == 34) {     // hashwithoutsine41
+        return hashwithoutsine41(p);
+    } else if (Hash == 35) {     // hashwithoutsine42
+        return uint3(hashwithoutsine42(p),0);
+    } else if (Hash == 36) {     // hashwithoutsine43
+        return hashwithoutsine33(p.xyz);
+    } else if (Hash == 37) {     // hashwithoutsine44
+        return hashwithoutsine44(p).xyz;
+    } else {
+        return 0;
+    }
+
+    /*
+
+    } else if (Hash == 38) {     // hybridtaus
+        return hybridtaus(p);
+    } else if (Hash == 39) {     // ign
+        return uint3(ign(float2(p.xy) / float(0xffffffffu)) * 0xffffffffu);
+    } else if (Hash == 40) {     // iqint1
+        return uint3(iqint1(p.x));
+    } else if (Hash == 41) {     // iqint1_linear2
+        return uint3(iqint1(seed(p.xy)));
+    } else if (Hash == 42) {     // iqint1_linear3
+        return uint3(iqint1(seed(p.xyz)));
+    } else if (Hash == 43) {     // iqint1_linear4
+        return uint3(iqint1(seed(p)));
+    } else if (Hash == 44) {     // iqint1_nested2
+        return uint3(iqint1(iqint1(p.x) + p.y));
+    } else if (Hash == 45) {     // iqint1_nested3
+        return uint3(iqint1(iqint1(iqint1(p.x) + p.y) + p.z));
+    } else if (Hash == 46) {     // iqint1_nested4
+        return uint3(iqint1(iqint1(iqint1(iqint1(p.x) + p.y) + p.z) + p.w));
+    } else if (Hash == 47) {     // iqint2
+        return iqint2(p.xyz);
+    } else if (Hash == 48) {     // iqint3
+        return uint3(iqint3(p.xy));
+    } else if (Hash == 49) {     // jkiss32
+        return uint3(jkiss32(p.xy));
+    } else if (Hash == 50) {     // lcg
+        return uint3(lcg(p.x));
+    } else if (Hash == 51) {     // lcg_linear2
+        return uint3(lcg(seed(p.xy)));
+    } else if (Hash == 52) {     // lcg_linear3
+        return uint3(lcg(seed(p.xyz)));
+    } else if (Hash == 53) {     // lcg_linear4
+        return uint3(lcg(seed(p)));
+    } else if (Hash == 54) {     // lcg_nested2
+        return uint3(lcg(lcg(p.x) + p.y));
+    } else if (Hash == 55) {     // lcg_nested3
+        return uint3(lcg(lcg(lcg(p.x) + p.y) + p.z));
+    } else if (Hash == 56) {     // lcg_nested4
+        return uint3(lcg(lcg(lcg(lcg(p.x) + p.y) + p.z) + p.w));
+    } else if (Hash == 57) {     // md5_1
+        return md5(p.x).xyz;
+    } else if (Hash == 58) {     // md5_2
+        return md5(p.xy).xyz;
+    } else if (Hash == 59) {     // md5_3
+        return md5(p.xyz).xyz;
+    } else if (Hash == 60) {     // md5_4
+        return md5(p).xyz;
+    } else if (Hash == 61) {     // murmur3
+        return uint3(murmur3(p.x));
+    } else if (Hash == 62) {     // murmur3_linear2
+        return uint3(murmur3(seed(p.xy)));
+    } else if (Hash == 63) {     // murmur3_linear3
+        return uint3(murmur3(seed(p.xyz)));
+    } else if (Hash == 64) {     // murmur3_linear4
+        return uint3(murmur3(seed(p)));
+    } else if (Hash == 65) {     // murmur3_multibyte2
+        return uint3(murmur3(p.xy));
+    } else if (Hash == 66) {     // murmur3_multibyte3
+        return uint3(murmur3(p.xyz));
+    } else if (Hash == 67) {     // murmur3_multibyte4
+        return uint3(murmur3(p));
+    } else if (Hash == 68) {     // murmur3_nested2
+        return uint3(murmur3(murmur3(p.x) + p.y));
+    } else if (Hash == 69) {     // murmur3_nested3
+        return uint3(murmur3(murmur3(murmur3(p.x) + p.y) + p.z));
+    } else if (Hash == 70) {     // murmur3_nested4
+        return uint3(murmur3(murmur3(murmur3(murmur3(p.x) + p.y) + p.z) + p.w));
+    } else if (Hash == 71) {     // pcg
+        return uint3(pcg(p.x));
+    } else if (Hash == 72) {     // pcg2d
+        return uint3(pcg2d(p.xy),0);
+    } else if (Hash == 73) {     // pcg3d
+        return pcg3d(p.xyz);
+    } else if (Hash == 74) {     // pcg3d16
+        return pcg3d(p.xyz);
+    } else if (Hash == 75) {     // pcg4d
+        return pcg4d(p.xyzw);
+    } else if (Hash == 76) {     // pcg_linear2
+    } else if (Hash == 77) {     // pcg_linear3
+    } else if (Hash == 78) {     // pcg_linear4
+    } else if (Hash == 79) {     // pcg_nested2
+    } else if (Hash == 80) {     // pcg_nested3
+    } else if (Hash == 81) {     // pcg_nested4
+    } else if (Hash == 82) {     // pseudo
+    } else if (Hash == 83) {     // ranlim32
+    } else if (Hash == 84) {     // ranlim32_linear2
+    } else if (Hash == 85) {     // ranlim32_linear3
+    } else if (Hash == 86) {     // ranlim32_linear4
+    } else if (Hash == 87) {     // ranlim32_nested2
+    } else if (Hash == 88) {     // ranlim32_nested3
+    } else if (Hash == 89) {     // ranlim32_nested4
+    } else if (Hash == 90) {     // superfast
+    } else if (Hash == 91) {     // superfast_linear2
+    } else if (Hash == 92) {     // superfast_linear3
+    } else if (Hash == 93) {     // superfast_linear4
+    } else if (Hash == 94) {     // superfast_multibyte2
+    } else if (Hash == 95) {     // superfast_multibyte3
+    } else if (Hash == 96) {     // superfast_multibyte4
+    } else if (Hash == 97) {     // superfast_nested2
+    } else if (Hash == 98) {     // superfast_nested3
+    } else if (Hash == 99) {     // superfast_nested4
+    } else if (Hash == 100) {     // tea2
+    } else if (Hash == 101) {     // tea3
+    } else if (Hash == 102) {     // tea4
+    } else if (Hash == 103) {     // tea5
+    } else if (Hash == 104) {     // tea6
+    } else if (Hash == 105) {     // trig
+    } else if (Hash == 106) {     // wang
+    } else if (Hash == 107) {     // wang_linear2
+    } else if (Hash == 108) {     // wang_linear3
+    } else if (Hash == 109) {     // wang_linear4
+    } else if (Hash == 110) {     // wang_nested2
+    } else if (Hash == 111) {     // wang_nested3
+    } else if (Hash == 112) {     // wang_nested4
+    } else if (Hash == 113) {     // xorshift128
+    } else if (Hash == 114) {     // xorshift32
+    } else if (Hash == 115) {     // xorshift32_linear2
+    } else if (Hash == 116) {     // xorshift32_linear3
+    } else if (Hash == 117) {     // xorshift32_linear4
+    } else if (Hash == 118) {     // xorshift32_nested2
+    } else if (Hash == 119) {     // xorshift32_nested3
+    } else if (Hash == 120) {     // xorshift32_nested4
+    } else if (Hash == 121) {     // xxhash32
+    } else if (Hash == 122) {     // xxhash32_linear2
+    } else if (Hash == 123) {     // xxhash32_linear3
+    } else if (Hash == 124) {     // xxhash32_linear4
+    } else if (Hash == 125) {     // xxhash32_multibyte2
+    } else if (Hash == 126) {     // xxhash32_multibyte3
+    } else if (Hash == 127) {     // xxhash32_multibyte4
+    } else if (Hash == 128) {     // xxhash32_nested2
+    } else if (Hash == 129) {     // xxhash32_nested3
+    } else if (Hash == 130) {     // xxhash32_nested4
+    }*/
+
+    /*
     switch(Hash)
     {
         case 0:
@@ -73,6 +291,7 @@ uint3 Hash_Multiplexer(int Hash, uint3 pos)
             return 0;
     }
     return 0;
+    */
 }
 
 // 3D jitter offset within a voronoi noise cell
