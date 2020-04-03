@@ -7,7 +7,8 @@
 
 uint3 Hash_Multiplexer(int Hash, uint3 pos)
 {
-    uint4 p = uint4(pos.xyz, pos.x ^ pos.y ^ pos.z);
+
+    uint4 p = uint4(pos.xyz, 0u);
 
     if (Hash == 0) {            // bbs
         return bbs(p.x);
@@ -58,107 +59,101 @@ uint3 Hash_Multiplexer(int Hash, uint3 pos)
     } else if (Hash == 23) {     // esgtsa_nested4
         return esgtsa(esgtsa(esgtsa(esgtsa(p.x) + p.y) + p.z) + p.w);
     } else if (Hash == 24) {     // fast
-        return RandFast(p.xy);
+        return RandFast(p.xy) * 0xffffffffu;
     } else if (Hash == 25) {     // hashwithoutsine11
-        return hashwithoutsine11(p.x);
+        return hashwithoutsine11(p.x) * 0xffffffffu;
     } else if (Hash == 26) {     // hashwithoutsine12
-        return uint3(hashwithoutsine12(p.x).xy, 0u);
+        return hashwithoutsine12(p.xy) * 0xffffffffu;
     } else if (Hash == 27) {     // hashwithoutsine13
-        return hashwithoutsine13(p.x);
+        return hashwithoutsine13(p.xyz) * 0xffffffffu;
     } else if (Hash == 28) {     // hashwithoutsine21
-        return hashwithoutsine21(p.xy);
+        return uint3(hashwithoutsine21(p.x) * 0xffffffffu, 0u);
     } else if (Hash == 29) {     // hashwithoutsine22
-        return uint3(hashwithoutsine(p.xy), 0u);
+        return uint3(hashwithoutsine22(p.xy) * 0xffffffffu, 0u);
     } else if (Hash == 30) {     // hashwithoutsine23
-        return hashwithoutsine23(p.xyz);
+        return uint3(hashwithoutsine23(p.xyz) * 0xffffffffu, 0u);
     } else if (Hash == 31) {     // hashwithoutsine31
-        return hashwithoutsine31(p.xyz);
+        return hashwithoutsine31(p.x) * 0xffffffffu;
     } else if (Hash == 32) {     // hashwithoutsine32
-        return uint3(hashwithoutsine32(p.xyz),0);
+        return hashwithoutsine32(p.xy) * 0xffffffffu;
     } else if (Hash == 33) {     // hashwithoutsine33
-        return hashwithoutsine33(p.xyz);
+        return hashwithoutsine33(p.xyz) * 0xffffffffu;
     } else if (Hash == 34) {     // hashwithoutsine41
-        return hashwithoutsine41(p);
+        return hashwithoutsine41(p.x).xyz * 0xffffffffu;
     } else if (Hash == 35) {     // hashwithoutsine42
-        return uint3(hashwithoutsine42(p),0);
+        return hashwithoutsine42(p.xy).xyz * 0xffffffffu;
     } else if (Hash == 36) {     // hashwithoutsine43
-        return hashwithoutsine33(p.xyz);
+        return hashwithoutsine43(p.xyz).xyz * 0xffffffffu;
     } else if (Hash == 37) {     // hashwithoutsine44
-        return hashwithoutsine44(p).xyz;
-    } else {
-        return 0;
-    }
-
-    /*
-
+        return hashwithoutsine44(p).xyz * 0xffffffffu;
     } else if (Hash == 38) {     // hybridtaus
         return hybridtaus(p);
     } else if (Hash == 39) {     // ign
-        return uint3(ign(float2(p.xy) / float(0xffffffffu)) * 0xffffffffu);
+        return ign(p.xy) * 0xffffffffu;
     } else if (Hash == 40) {     // iqint1
-        return uint3(iqint1(p.x));
+        return iqint1(p.x);
     } else if (Hash == 41) {     // iqint1_linear2
-        return uint3(iqint1(seed(p.xy)));
+        return iqint1(seed(p.xy));
     } else if (Hash == 42) {     // iqint1_linear3
-        return uint3(iqint1(seed(p.xyz)));
+        return iqint1(seed(p.xyz));
     } else if (Hash == 43) {     // iqint1_linear4
-        return uint3(iqint1(seed(p)));
+        return iqint1(seed(p));
     } else if (Hash == 44) {     // iqint1_nested2
-        return uint3(iqint1(iqint1(p.x) + p.y));
+        return iqint1(iqint1(p.x) + p.y);
     } else if (Hash == 45) {     // iqint1_nested3
-        return uint3(iqint1(iqint1(iqint1(p.x) + p.y) + p.z));
+        return iqint1(iqint1(iqint1(p.x) + p.y) + p.z);
     } else if (Hash == 46) {     // iqint1_nested4
-        return uint3(iqint1(iqint1(iqint1(iqint1(p.x) + p.y) + p.z) + p.w));
+        return iqint1(iqint1(iqint1(iqint1(p.x) + p.y) + p.z) + p.w);
     } else if (Hash == 47) {     // iqint2
         return iqint2(p.xyz);
     } else if (Hash == 48) {     // iqint3
-        return uint3(iqint3(p.xy));
+        return iqint3(p.xy);
     } else if (Hash == 49) {     // jkiss32
-        return uint3(jkiss32(p.xy));
+        return jkiss32(p.xy);
     } else if (Hash == 50) {     // lcg
-        return uint3(lcg(p.x));
+        return lcg(p.x);
     } else if (Hash == 51) {     // lcg_linear2
-        return uint3(lcg(seed(p.xy)));
+        return lcg(seed(p.xy));
     } else if (Hash == 52) {     // lcg_linear3
-        return uint3(lcg(seed(p.xyz)));
+        return lcg(seed(p.xyz));
     } else if (Hash == 53) {     // lcg_linear4
-        return uint3(lcg(seed(p)));
+        return lcg(seed(p));
     } else if (Hash == 54) {     // lcg_nested2
-        return uint3(lcg(lcg(p.x) + p.y));
+        return lcg(lcg(p.x) + p.y);
     } else if (Hash == 55) {     // lcg_nested3
-        return uint3(lcg(lcg(lcg(p.x) + p.y) + p.z));
+        return lcg(lcg(lcg(p.x) + p.y) + p.z);
     } else if (Hash == 56) {     // lcg_nested4
-        return uint3(lcg(lcg(lcg(lcg(p.x) + p.y) + p.z) + p.w));
+        return lcg(lcg(lcg(lcg(p.x) + p.y) + p.z) + p.w);
     } else if (Hash == 57) {     // md5_1
-        return md5(p.x).xyz;
+        return 0; //return md5(uint4(p.x,0u,0u,0u)).xyz;
     } else if (Hash == 58) {     // md5_2
-        return md5(p.xy).xyz;
+        return 0; //return md5(uint4(p.xy,0u,0u)).xyz;
     } else if (Hash == 59) {     // md5_3
-        return md5(p.xyz).xyz;
+        return 0; //return md5(uint4(p.xyz,0u)).xyz;
     } else if (Hash == 60) {     // md5_4
-        return md5(p).xyz;
+        return 0; //return md5(p).xyz;
     } else if (Hash == 61) {     // murmur3
-        return uint3(murmur3(p.x));
+        return murmur3(p.x);
     } else if (Hash == 62) {     // murmur3_linear2
-        return uint3(murmur3(seed(p.xy)));
+        return murmur3(seed(p.xy));
     } else if (Hash == 63) {     // murmur3_linear3
-        return uint3(murmur3(seed(p.xyz)));
+        return murmur3(seed(p.xyz));
     } else if (Hash == 64) {     // murmur3_linear4
-        return uint3(murmur3(seed(p)));
+        return murmur3(seed(p));
     } else if (Hash == 65) {     // murmur3_multibyte2
-        return uint3(murmur3(p.xy));
+        return murmur3(p.xy);
     } else if (Hash == 66) {     // murmur3_multibyte3
-        return uint3(murmur3(p.xyz));
+        return murmur3(p.xyz);
     } else if (Hash == 67) {     // murmur3_multibyte4
-        return uint3(murmur3(p));
+        return murmur3(p);
     } else if (Hash == 68) {     // murmur3_nested2
-        return uint3(murmur3(murmur3(p.x) + p.y));
+        return murmur3(murmur3(p.x) + p.y);
     } else if (Hash == 69) {     // murmur3_nested3
-        return uint3(murmur3(murmur3(murmur3(p.x) + p.y) + p.z));
+        return murmur3(murmur3(murmur3(p.x) + p.y) + p.z);
     } else if (Hash == 70) {     // murmur3_nested4
-        return uint3(murmur3(murmur3(murmur3(murmur3(p.x) + p.y) + p.z) + p.w));
+        return murmur3(murmur3(murmur3(murmur3(p.x) + p.y) + p.z) + p.w);
     } else if (Hash == 71) {     // pcg
-        return uint3(pcg(p.x));
+        return pcg(p.x);
     } else if (Hash == 72) {     // pcg2d
         return uint3(pcg2d(p.xy),0);
     } else if (Hash == 73) {     // pcg3d
@@ -166,132 +161,120 @@ uint3 Hash_Multiplexer(int Hash, uint3 pos)
     } else if (Hash == 74) {     // pcg3d16
         return pcg3d(p.xyz);
     } else if (Hash == 75) {     // pcg4d
-        return pcg4d(p.xyzw);
+        return pcg4d(p).xyz;
     } else if (Hash == 76) {     // pcg_linear2
+        return pcg(seed(p.xy));
     } else if (Hash == 77) {     // pcg_linear3
+        return pcg(seed(p.xyz));
     } else if (Hash == 78) {     // pcg_linear4
+        return pcg(seed(p));
     } else if (Hash == 79) {     // pcg_nested2
+        return pcg(pcg(p.x) + p.y);
     } else if (Hash == 80) {     // pcg_nested3
+        return pcg(pcg(pcg(p.x) + p.y) + p.z);
     } else if (Hash == 81) {     // pcg_nested4
+        return pcg(pcg(pcg(pcg(p.x) + p.y) + p.z) + p.w);
     } else if (Hash == 82) {     // pseudo
+        return PseudoRandom(p.xy);
     } else if (Hash == 83) {     // ranlim32
+        return ranlim32(p.x);
     } else if (Hash == 84) {     // ranlim32_linear2
+        return ranlim32(seed(p.xy));
     } else if (Hash == 85) {     // ranlim32_linear3
+        return ranlim32(seed(p.xyz));
     } else if (Hash == 86) {     // ranlim32_linear4
+        return ranlim32(seed(p));
     } else if (Hash == 87) {     // ranlim32_nested2
+        return ranlim32(ranlim32(p.x) + p.y);
     } else if (Hash == 88) {     // ranlim32_nested3
+        return ranlim32(ranlim32(ranlim32(p.x) + p.y) + p.z);
     } else if (Hash == 89) {     // ranlim32_nested4
+        return ranlim32(ranlim32(ranlim32(ranlim32(p.x) + p.y) + p.z) + p.w);
     } else if (Hash == 90) {     // superfast
+        return superfast(p.x);
     } else if (Hash == 91) {     // superfast_linear2
+        return superfast(seed(p.xy));
     } else if (Hash == 92) {     // superfast_linear3
+        return superfast(seed(p.xyz));
     } else if (Hash == 93) {     // superfast_linear4
+        return superfast(seed(p));
     } else if (Hash == 94) {     // superfast_multibyte2
+        return superfast(p.xy);
     } else if (Hash == 95) {     // superfast_multibyte3
+        return superfast(p.xyz);
     } else if (Hash == 96) {     // superfast_multibyte4
+        return superfast(p);
     } else if (Hash == 97) {     // superfast_nested2
+        return superfast(superfast(p.x) + p.y);
     } else if (Hash == 98) {     // superfast_nested3
+        return superfast(superfast(superfast(p.x) + p.y) + p.z);
     } else if (Hash == 99) {     // superfast_nested4
+        return superfast(superfast(superfast(superfast(p.x) + p.y) + p.z) + p.w);
     } else if (Hash == 100) {     // tea2
+        return uint3(tea(2, p.xy), 0u);
     } else if (Hash == 101) {     // tea3
+        return uint3(tea(3, p.xy), 0u);
     } else if (Hash == 102) {     // tea4
+        return uint3(tea(4, p.xy), 0u);
     } else if (Hash == 103) {     // tea5
+        return uint3(tea(5, p.xy), 0u);
     } else if (Hash == 104) {     // tea6
+        return uint3(tea(6, p.xy), 0u);
     } else if (Hash == 105) {     // trig
+        return trig(p.xy) * 0xffffffffu;
     } else if (Hash == 106) {     // wang
+        return wang(p.x);
     } else if (Hash == 107) {     // wang_linear2
+        return wang(seed(p.xy));
     } else if (Hash == 108) {     // wang_linear3
+        return wang(seed(p.xyz));
     } else if (Hash == 109) {     // wang_linear4
+        return wang(seed(p));
     } else if (Hash == 110) {     // wang_nested2
+        return wang(wang(p.x) + p.y);
     } else if (Hash == 111) {     // wang_nested3
+        return wang(wang(wang(p.x) + p.y) + p.z);
     } else if (Hash == 112) {     // wang_nested4
+        return wang(wang(wang(wang(p.x) + p.y) + p.z) + p.w);
     } else if (Hash == 113) {     // xorshift128
+        return xorshift128(p);
     } else if (Hash == 114) {     // xorshift32
+        return xorshift32(p.x);
     } else if (Hash == 115) {     // xorshift32_linear2
+        return xorshift32(seed(p.xy));
     } else if (Hash == 116) {     // xorshift32_linear3
+        return xorshift32(seed(p.xyz));
     } else if (Hash == 117) {     // xorshift32_linear4
+        return xorshift32(seed(p));
     } else if (Hash == 118) {     // xorshift32_nested2
+        return xorshift32(xorshift32(p.x) + p.y);
     } else if (Hash == 119) {     // xorshift32_nested3
+        return xorshift32(xorshift32(xorshift32(p.x) + p.y) + p.z);
     } else if (Hash == 120) {     // xorshift32_nested4
+        return xorshift32(xorshift32(xorshift32(xorshift32(p.x) + p.y) + p.z) + p.w);
     } else if (Hash == 121) {     // xxhash32
+        return xxhash32(p.x);
     } else if (Hash == 122) {     // xxhash32_linear2
+        return xxhash32(seed(p.xy));
     } else if (Hash == 123) {     // xxhash32_linear3
+        return xxhash32(seed(p.xyz));
     } else if (Hash == 124) {     // xxhash32_linear4
+        return xxhash32(seed(p));
     } else if (Hash == 125) {     // xxhash32_multibyte2
+        return xxhash32(p.xy);
     } else if (Hash == 126) {     // xxhash32_multibyte3
+        return xxhash32(p.xyz);
     } else if (Hash == 127) {     // xxhash32_multibyte4
+        return xxhash32(p);
     } else if (Hash == 128) {     // xxhash32_nested2
+        return xxhash32(xxhash32(p.x) + p.y);
     } else if (Hash == 129) {     // xxhash32_nested3
+        return xxhash32(xxhash32(xxhash32(p.x) + p.y) + p.z);
     } else if (Hash == 130) {     // xxhash32_nested4
-    }*/
-
-    /*
-    switch(Hash)
-    {
-        case 0:
-            return bbs(bbs(bbs(pos.x) + pos.y) + pos.z);
-        case 1:
-            return city(city(city(pos.x) + pos.y) + pos.z);
-        case 2:
-            return esgtsa(esgtsa(esgtsa(pos.x) + pos.y) + pos.z);
-        case 3:
-            return RandFast(pos.xy) * 0xffffffffu;
-        case 4:
-            return hashwithoutsine13(pos) * 0xffffffffu;
-        case 5:
-            return hybridtaus(uint4(pos,0));
-        case 6:
-            return ign(pos.xy) * 0xffffffffu;
-        case 7:
-            return iqint1(iqint1(iqint1(pos.x) + pos.y) + pos.z);
-        case 8:
-            return iqint2(pos);
-        case 9:
-            return iqint3(pos.xy);
-        case 10:
-            return jkiss32(pos.xy);
-        case 11:
-            return lcg(lcg(lcg(pos.x) + pos.y) + pos.z);
-        case 12:
-            return murmur3(pos.xy);
-        case 13:
-            return uint3(pcg2d(pos.xy),0);
-        case 14:
-            return pcg3d(pos);
-        case 15:
-            return pcg3d16(pos);
-        case 16:
-            return pcg4d(uint4(pos,0)).xyz;
-        case 17:
-            return PseudoRandom(pos.xy);
-        case 18:
-            return ranlim32(ranlim32(ranlim32(pos.x) + pos.y) + pos.z);
-        case 19:
-            return superfast(superfast(superfast(pos.x) + pos.y) + pos.z);
-        case 20:
-            return uint3(tea(2,pos.xy), 0);
-        case 21:
-            return uint3(tea(3,pos.xy), 0);
-        case 22:
-            return uint3(tea(4,pos.xy), 0);
-        case 23:
-            return uint3(tea(5,pos.xy), 0);
-        case 24:
-            return uint3(tea(6,pos.xy), 0);
-        case 25:
-            return trig(pos.xy);
-        case 26:
-            return wang(wang(wang(pos.x) + pos.y) + pos.z);
-        case 27:
-            return xorshift128(uint4(pos,0));
-        case 28:
-            return xorshift32(xorshift32(xorshift32(pos.x) + pos.y) + pos.z);
-        case 29:
-            return xxhash32(pos);
-        default:
-            return 0;
+        return xxhash32(xxhash32(xxhash32(xxhash32(p.x) + p.y) + p.z) + p.w);
+    } else {
+        return 0;
     }
-    return 0;
-    */
 }
 
 // 3D jitter offset within a voronoi noise cell
@@ -350,11 +333,11 @@ float4 myVoronoiNoise3D_ALU(float3 v, int Quality, bool bTiling, float RepeatSiz
     // everybody else searches a base 2x2x2 neighborhood
     else
     {
-        UNROLL for (offset.x = 0; offset.x <= 1; ++offset.x)
+        for (offset.x = 0; offset.x <= 1; ++offset.x)
         {
-            UNROLL for (offset.y = 0; offset.y <= 1; ++offset.y)
+            for (offset.y = 0; offset.y <= 1; ++offset.y)
             {
-                UNROLL for (offset.z = 0; offset.z <= 1; ++offset.z)
+                for (offset.z = 0; offset.z <= 1; ++offset.z)
                 {
                     p = offset + myVoronoiCornerSample(NoiseTileWrap(iv + offset, bTiling, RepeatSize), Quality, Hash);
                     mindist = VoronoiCompare(mindist, iv + p, fv - p, bDistanceOnly);
@@ -374,11 +357,11 @@ float4 myVoronoiNoise3D_ALU(float3 v, int Quality, bool bTiling, float RepeatSiz
     // quality level 4: add extra sets of four cells in each direction
     if (Quality >= 4)
     {
-        UNROLL for (offset.x = -1; offset.x <= 2; offset.x += 3)
+        for (offset.x = -1; offset.x <= 2; offset.x += 3)
         {
-            UNROLL for (offset.y = 0; offset.y <= 1; ++offset.y)
+            for (offset.y = 0; offset.y <= 1; ++offset.y)
             {
-                UNROLL for (offset.z = 0; offset.z <= 1; ++offset.z)
+                for (offset.z = 0; offset.z <= 1; ++offset.z)
                 {
                     // along x axis
                     p = offset.xyz + myVoronoiCornerSample(NoiseTileWrap(iv + offset.xyz, bTiling, RepeatSize), Quality, Hash);
@@ -487,7 +470,7 @@ MaterialFloat4 myMaterialExpressionVectorNoise(MaterialFloat3 Position, int Qual
 	switch (Function)
 	{
 	case 0:	// Cellnoise
-		result.xyz = float3(Hash_Multiplexer(Hash,(int3(floor(NoiseTileWrap(Position, bTiling, TileSize)))))) / 0xffff;
+		result.xyz = float3(Hash_Multiplexer(Hash,(int3(floor(NoiseTileWrap(Position, bTiling, TileSize)))))) / 0xffffffffu;
 		break;
 	case 1: // Color noise
 		result.xyz = float3(Jacobian[0].w, Jacobian[1].w, Jacobian[2].w);
